@@ -1,0 +1,6 @@
+main: me.pigauts.voxelmenus.VoxelMenusPlugin
+name: VoxelMenus
+author: Pigauts
+description: A menus plugin
+version: 1.0
+api-version: 1.14

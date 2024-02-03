@@ -1,0 +1,28 @@
+# Dynamic prices
+
+material-whitelist: true
+
+material-value:
+  dirt: 1
+  cobblestone: 1
+
+enchants-value:
+  arrow_fire:1: 100
+
+lore-value:
+  'COMMON': 10
+  'RARE': 100
+  'EPIC': 1000
+  'LEGENDARY': 10000
+
+id-value:
+  'ONE_STAR': 10
+  'TWO_STAR': 100
+  'THREE_STAR': 1000
+  'FOUR_STAR': 10000
+  'FIVE_STAR': 100000
+
+# Static prices
+
+custom-prices:
+  my_item: 100

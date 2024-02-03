@@ -1,0 +1,126 @@
+title: 'example menu'
+
+rows: 6
+
+type: dynamic
+
+refresh: 200
+
+animation: none
+
+bottom-view-movement: true
+
+on-open:
+  SOUND: 'mySound'
+  ANIMATION: 'myAnimation'
+
+on-close:
+  SOUND: 'mySound'
+
+on-place-item:
+  example_1:
+    placed:
+      my_item: 22
+      another_item: 23
+    function:
+      VAULT_GIVE: 100
+
+on-item-click:
+
+layouts:
+  default:
+    - 'A A A A A A A A A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A A A A A A A A A'
+  SPECIAL:
+    conditions:
+      VAULT: 100
+      FLAG: "bobi"
+    layout:
+      - 'A A A A A A A A A'
+      - 'A _ _ _ _ _ _ _ A'
+      - 'A _ _ _ _ _ _ _ A'
+      - 'A _ _ _ _ _ _ _ A'
+      - 'A _ _ _ _ _ _ _ A'
+      - 'A A A A A A A A A'
+
+buttons: # ['_', 'n'] are reserved for null (empty slots), you can use any other character (abcd1234*#@&)
+  A:
+    material: black stained glass pane
+    amount: 1
+    name: ' '
+    lore: [""]
+    model-data: -1
+    enchanted: false
+    functions:
+      - my_function
+      - example_function
+
+  B:
+    material: gray stained glass pane
+
+  C:
+    item: my_custom_item
+
+
+functions:
+  my_function:
+    1:
+      type: simple_condition
+      click: [ LEFT, SHIFT_LEFT ]
+      condition: { }
+      success: { }
+      failure: { }
+      ACTION1: arst
+      ACTION2: arst
+  'a':
+    1:
+      click: [LEFT]
+      ACTION: value
+
+    2:
+      click: [RIGHT]
+      ACTION: value
+
+    3:
+      click: [SHIFT_LEFT]
+      ACTION: value
+
+    4:
+      click: [SHIFT_RIGHT]
+      ACTION: value
+
+    5:
+      click: [ANY]
+      condition: {}
+      success: {}
+      failure: {}
+
+  'b':
+    1:
+      type: simple_condition
+      click: [LEFT, SHIFT_LEFT]
+      condition: { }
+      success: { }
+      failure: { }
+      ACTION1: arst
+      ACTION2: arst
+
+    2:
+      ACTION1: sart
+
+    3:
+      if: {}
+      do: {}
+      else: {}
+
+    4:
+      click_type: [RIGHT, SHIFT_RIGHT]
+      type: execution
+      ACTION: value
+
+    5:
+      ACTION: value

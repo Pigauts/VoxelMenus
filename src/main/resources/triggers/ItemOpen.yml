@@ -1,0 +1,9 @@
+type: INTERACT
+action: [LEFT_CLICK_AIR, LEFT_CLICK_BLOCK]
+item: 'opening_key'
+location: none
+function:
+  SOUND: BLOCK_CHEST_OPEN
+  MESSAGE: 'You''ve opened a menu via item and so it was free!'
+  OPEN_MENU: 'ExampleDynamic.yml'
+  REMOVE_ITEM: 'opening_key'

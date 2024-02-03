@@ -1,0 +1,71 @@
+package me.pigauts.voxelmenus.config;
+
+import me.pigauts.voxelmenus.VoxelMenusPlugin;
+import me.pigauts.voxelmenus.VoxelPlugin;
+import me.pigauts.voxelmenus.event.config.ActionLoadEvent;
+import me.pigauts.voxelmenus.event.config.ConditionLoadEvent;
+import me.pigauts.voxelmenus.event.config.StatementLoadEvent;
+import me.pigauts.voxelmenus.function.Function;
+import me.pigauts.voxelmenus.function.statement.Statement;
+import me.pigauts.voxelmenus.function.statement.action.Action;
+import me.pigauts.voxelmenus.function.statement.condition.Condition;
+import me.pigauts.voxelmenus.function.statement.condition.ConditionSet;
+import me.pigauts.voxelmenus.menu.Menu;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FactoryUtil {
+
+    private static final VoxelMenusPlugin plugin = VoxelMenusPlugin.get();
+
+    public static Statement createStatement(Config section) {
+
+        StatementLoadEvent event = new StatementLoadEvent(section, plugin.getFactory().createStatement(section));
+        VoxelPlugin.callEvent(event);
+
+        return event.getResult();
+    }
+
+    public static Action createAction(String key, Object value) {
+
+        ActionLoadEvent event = new ActionLoadEvent(key, value, plugin.getFactory().createAction(key, value));
+        VoxelPlugin.callEvent(event);
+
+        return event.getResult();
+    }
+
+    public static Condition createCondition(String key, Object value) {
+
+        ConditionLoadEvent event = new ConditionLoadEvent(key, value, plugin.getFactory().createCondition(key, value));
+        VoxelPlugin.callEvent(event);
+
+        return event.getResult();
+    }
+
+    public static ConditionSet createConditionSet(Config section) {
+        List<Condition> conditions = new ArrayList<>();
+
+        for (String key : section.getKeys(false)) {
+            conditions.add(createCondition(key, section.get(key)));
+        }
+
+        return new ConditionSet(conditions);
+    }
+
+    public static Function createFunction(Config section) {
+
+        List<Statement> statements = new ArrayList<>();
+
+        for (Config subSection : section.getSections()) {
+            statements.add(createStatement(subSection));
+        }
+
+        return new Function(statements);
+    }
+
+    public static Menu createMenu(Config config) {
+        return plugin.getFactory().createMenu(config);
+    }
+
+}

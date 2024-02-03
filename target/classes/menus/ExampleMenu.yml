@@ -1,0 +1,109 @@
+title: 'example menu'
+
+rows: 6
+
+refresh: 200
+
+animation: none
+
+open-event:
+  SOUND: 'mySound'
+  ANIMATION: 'myAnimation'
+
+close-event:
+  SOUND: 'mySound'
+
+layouts:
+  DEFAULT:
+    conditions:
+      VAULT: 100
+    contents:
+      [ A, A, A, B, A, A, A, A, A,
+        A, _, _, _, _, _, _, _, A,
+        A, _, _, _, _, _, _, _, A,
+        A, _, _, _, _, _, _, _, A,
+        A, _, _, _, _, _, _, _, A,
+        A, A, A, A, A, A, A, A, A ]
+    buttons:
+      [ _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, a, b, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _ ]
+  SPECIAL:
+    contents:
+      [ 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, _, _, _, _, _, _, _, 1,
+        1, _, _, _, _, _, _, _, 1,
+        1, _, _, _, _, _, _, _, 1,
+        1, _, _, _, _, _, _, _, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+    buttons:
+      [ _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _, _ ]
+
+items: # ['_', 'n'] are reserved for null (empty slots), you can use any other character (abcd1234*#@&)
+  A:
+    material: black stained glass pane
+    amount: 1
+    name: ' '
+    lore: [""]
+    model-data: -1
+    enchanted: false
+  B:
+    material: gray stained glass pane
+
+functions: # ['_', 'n'] are reserved for null (empty slots)
+  'a':
+    1:
+      click: [LEFT]
+      ACTION: value
+
+    2:
+      click: [RIGHT]
+      ACTION: value
+
+    3:
+      click: [SHIFT_LEFT]
+      ACTION: value
+
+    4:
+      click: [SHIFT_RIGHT]
+      ACTION: value
+
+    5:
+      click: [ANY]
+      condition: {}
+      success: {}
+      failure: {}
+
+  'b':
+    1:
+      type: simple_condition
+      click: [LEFT, SHIFT_LEFT]
+      condition: { }
+      success: { }
+      failure: { }
+      ACTION1: arst
+      ACTION2: arst
+
+    2:
+      ACTION1: sart
+
+    3:
+      if: {}
+      do: {}
+      else: {}
+
+    4:
+      click_type: [RIGHT, SHIFT_RIGHT]
+      type: execution
+      ACTION: value
+
+    5:
+      ACTION: value

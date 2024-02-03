@@ -1,0 +1,96 @@
+package me.pigauts.voxelmenus;
+
+import me.pigauts.voxelmenus.command.CommandManager;
+import me.pigauts.voxelmenus.command.menu.MenusCommand;
+import me.pigauts.voxelmenus.config.FactoryManager;
+import me.pigauts.voxelmenus.effect.animation.AnimationManager;
+import me.pigauts.voxelmenus.effect.message.MessageManager;
+import me.pigauts.voxelmenus.item.ItemManager;
+import me.pigauts.voxelmenus.listener.InventoryClickListener;
+import me.pigauts.voxelmenus.listener.PlayerJoinQuitListener;
+import me.pigauts.voxelmenus.menu.MenuManager;
+import me.pigauts.voxelmenus.user.UserManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class VoxelMenusPlugin extends JavaPlugin implements VoxelPlugin {
+
+    private final UserManager userManager = new UserManager(this);
+    private final MenuManager menuManager = new MenuManager(this);
+    private final ItemManager itemManager = new ItemManager(this);
+    private final AnimationManager animationManager = new AnimationManager(this);
+    private final MessageManager messageManager = new MessageManager(this);
+    private final CommandManager commandManager = new CommandManager(this);
+    private final FactoryManager factoryManager = new FactoryManager(this);
+
+    private static VoxelMenusPlugin plugin;
+
+    @Override
+    public void onLoad() {
+        plugin = this;
+    }
+
+    @Override
+    public void onEnable() {
+
+        createPluginFolder();
+        createFolder("items");
+        createFolder("menus");
+        createFolder("messages");
+        createFolder("placeholders");
+        createFolder("triggers");
+
+        saveDefaultFile("menus", "ExampleDynamic.yml");
+
+        registerEvents(new PlayerJoinQuitListener(this));
+        registerEvents(new InventoryClickListener(this));
+
+        itemManager.load();
+        menuManager.load();
+        animationManager.load();
+
+        commandManager.addCommand(new MenusCommand());
+        commandManager.registerAll();
+
+        userManager.load();
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+
+
+    public static VoxelMenusPlugin get() {
+        return plugin;
+    }
+
+    public UserManager getUsers() {
+        return userManager;
+    }
+
+    public MenuManager getMenus() {
+        return menuManager;
+    }
+
+    public ItemManager getItems() {
+        return itemManager;
+    }
+
+    public AnimationManager getAnimations() {
+        return animationManager;
+    }
+
+    public MessageManager getMessages() {
+        return messageManager;
+    }
+
+    public CommandManager getCommands() {
+        return  commandManager;
+    }
+
+    public FactoryManager getFactory() {
+        return factoryManager;
+    }
+
+}
