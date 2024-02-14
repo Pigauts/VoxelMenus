@@ -3,6 +3,8 @@ package me.pigauts.voxelmenus;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 
 import java.io.File;
 import java.util.*;
@@ -102,17 +104,7 @@ public abstract class Helper {
 
     public static <T> T[] toArray(Collection<T> collection) {
         collection.removeIf(Objects::isNull);
-        return collection.toArray((T[]) new Object[collection.size()]);
-    }
-
-    public static <V> V[] applyLayout(List<String> layout, Map<String, V> map) {
-        V[] array = (V[]) new Object[layout.size()];
-
-        for (int i = 0; i < layout.size(); i++) {
-            array[i] = map.get(layout.get(i));
-        }
-
-        return array;
+        return (T[]) collection.toArray(new Object[collection.size()]);
     }
 
 
@@ -123,5 +115,14 @@ public abstract class Helper {
 
         return builder.toString();
     }
+
+    public static boolean intArrayContains(int[] array, int num) {
+        for (int i : array) {
+            if (i == num) return true;
+        }
+        return false;
+    }
+
+
 
 }

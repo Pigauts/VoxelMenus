@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.command.menu.subordinate;
 
 import me.pigauts.voxelmenus.command.subordinate.UserCommand;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 public class MenuOpenCmd extends UserCommand {
 

@@ -1,47 +1,67 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.function.Function;
 import me.pigauts.voxelmenus.menu.Menu;
+import me.pigauts.voxelmenus.menu.MenuSettings;
+import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.menu.view.SimpleView;
+import me.pigauts.voxelmenus.player.MenuPlayer;
+import org.bukkit.event.inventory.InventoryType;
 
-public abstract class SimpleMenu implements Menu {
+public class SimpleMenu implements Menu {
 
-    private final String name;
-    private final String title;
-    private final int size;
-    private final int refresh;
-    private final Function openFunction, closeFunction;
+    protected final String name;
+    protected final InventoryType storage;
+    protected final int size;
+    protected final int refresh;
+    protected final boolean keepOpen;
+    protected final boolean lockBottom, lockEmpty;
 
-    public SimpleMenu(String name, String title, int size, int refreshTicks, Function openFunction, Function closeFunction) {
+    public SimpleMenu(String name, MenuSettings settings) {
         this.name = name;
-        this.title = title;
-        this.size = size;
-        this.refresh = refreshTicks;
-        this.openFunction = openFunction;
-        this.closeFunction = closeFunction;
+        this.storage = settings.storage();
+        this.size = settings.size();
+        this.refresh = settings.refresh();
+        this.keepOpen = settings.keepOpen();
+        this.lockBottom = settings.lockBottom();
+        this.lockEmpty = settings.lockEmpty();
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    @Override
+    public InventoryType getStorage() { return storage; }
 
+    @Override
     public int getSize() {
         return size;
     }
 
+    @Override
     public int getRefresh() {
         return refresh;
     }
 
-    public Function getOpenFunction() {
-        return openFunction;
+    @Override
+    public boolean keepOpen() {
+        return keepOpen;
     }
 
-    public Function getCloseFunction() {
-        return closeFunction;
+    @Override
+    public boolean lockBottom() {
+        return lockBottom;
+    }
+
+    @Override
+    public boolean lockEmpty() {
+        return lockEmpty;
+    }
+
+    @Override
+    public MenuView createView(MenuPlayer player) {
+        return new SimpleView(this, player);
     }
 
 }

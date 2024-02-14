@@ -1,22 +1,27 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.event.MenuClickEvent;
-import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.menu.button.Button;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.menu.MenuSettings;
+import me.pigauts.voxelmenus.menu.meta.MenuMeta;
+import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.menu.view.StaticMenuView;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 public class StaticMenu extends SimpleMenu {
 
-    private final Button[] buttons;
+    protected final MenuMeta meta;
 
-    public StaticMenu(String name, String title, int size, int refreshTicks, Function openFunction, Function closeFunction, Button[] buttons) {
-        super(name, title, size, refreshTicks, openFunction, closeFunction);
-        this.buttons = buttons;
+    public StaticMenu(String name, MenuSettings settings, MenuMeta meta) {
+        super(name, settings);
+        this.meta = meta;
+    }
+
+    public MenuMeta getMeta() {
+        return meta;
     }
 
     @Override
-    public Button[] getButtons(MenuPlayer player) {
-        return buttons;
+    public MenuView createView(MenuPlayer player) {
+        return new StaticMenuView(this, player);
     }
 
 }

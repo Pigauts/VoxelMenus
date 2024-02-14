@@ -1,0 +1,12 @@
+item-meta:
+  A:
+    name: 'Do the'
+    lore: ["mokey"]
+  B: ORANGE_STAINED_GLASS_PANE
+  C: YELLOW_STAINED_GLASS_PANE
+
+type: META
+
+frequency: 3
+
+repetitions: 3

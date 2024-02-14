@@ -1,8 +1,8 @@
-title: 'example menu'
+type: dynamic
+
+storage: chest
 
 rows: 6
-
-type: dynamic
 
 refresh: 200
 
@@ -10,44 +10,36 @@ animation: none
 
 bottom-view-movement: true
 
-on-open:
-  SOUND: 'mySound'
-  ANIMATION: 'myAnimation'
-
-on-close:
-  SOUND: 'mySound'
-
-on-place-item:
-  example_1:
-    placed:
-      my_item: 22
-      another_item: 23
-    function:
-      VAULT_GIVE: 100
-
-on-item-click:
-
-layouts:
-  default:
+default:
+  title: 'example menu'
+  on-open: {}
+  on-close: {}
+  on-update: {}
+  layout:
     - 'A A A A A A A A A'
     - 'A _ _ _ _ _ _ _ A'
     - 'A _ _ _ _ _ _ _ A'
     - 'A _ _ _ _ _ _ _ A'
     - 'A _ _ _ _ _ _ _ A'
     - 'A A A A A A A A A'
-  SPECIAL:
-    conditions:
-      VAULT: 100
-      FLAG: "bobi"
-    layout:
-      - 'A A A A A A A A A'
-      - 'A _ _ _ _ _ _ _ A'
-      - 'A _ _ _ _ _ _ _ A'
-      - 'A _ _ _ _ _ _ _ A'
-      - 'A _ _ _ _ _ _ _ A'
-      - 'A A A A A A A A A'
 
-buttons: # ['_', 'n'] are reserved for null (empty slots), you can use any other character (abcd1234*#@&)
+special:
+  conditions:
+    VAULT: 100
+    FLAG: "bobi"
+  title: special title
+  on-open: {}
+  on-close: {}
+  on-update: {}
+  layout:
+    - 'A A A A A A A A A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A _ _ _ _ _ _ _ A'
+    - 'A A A A A A A A A'
+
+icons: # ['_', 'n'] are reserved for null (empty slots), you can use any other character (abcd1234*#@&)
   A:
     material: black stained glass pane
     amount: 1

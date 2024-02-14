@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.function.statement.condition;
 
 import me.pigauts.voxelmenus.Helper;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 import java.util.Collection;
 

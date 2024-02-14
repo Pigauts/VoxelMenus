@@ -1,31 +1,43 @@
 package me.pigauts.voxelmenus.menu;
 
-import me.pigauts.voxelmenus.event.MenuClickEvent;
-import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.menu.button.Button;
-import me.pigauts.voxelmenus.user.MenuPlayer;
-import org.bukkit.inventory.ItemStack;
+import me.pigauts.voxelmenus.event.menu.MenuClickEvent;
+import me.pigauts.voxelmenus.event.menu.MenuCloseEvent;
+import me.pigauts.voxelmenus.event.menu.MenuOpenEvent;
+import me.pigauts.voxelmenus.event.menu.MenuUpdateEvent;
+import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.player.MenuPlayer;
+import org.bukkit.event.inventory.InventoryType;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 public interface Menu {
 
+    @NotNull
     String getName();
 
-    String getTitle();
+    @NotNull
+    InventoryType getStorage();
 
     int getSize();
 
     int getRefresh();
 
-    Function getOpenFunction();
+    boolean keepOpen();
 
-    Function getCloseFunction();
+    boolean lockBottom();
 
-    Button[] getButtons(MenuPlayer player);
+    boolean lockEmpty();
 
-    default Button[] getButtonsByName(MenuPlayer player, String name) {
-        return getButtons(player);
-    }
+    @NotNull
+    MenuView createView(@NotNull MenuPlayer player);
 
-    default void onClick(MenuClickEvent event) { }
+    default void onOpen(@NotNull MenuOpenEvent event) {}
+
+    default void onClose(@NotNull MenuCloseEvent event) {}
+
+    default void onUpdate(@NotNull MenuUpdateEvent event) {}
+
+    default void onClick(@NotNull MenuClickEvent event) {}
 
 }

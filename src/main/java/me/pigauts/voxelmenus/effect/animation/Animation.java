@@ -1,4 +1,9 @@
 package me.pigauts.voxelmenus.effect.animation;
 
-public class Animation {
+import me.pigauts.voxelmenus.menu.view.MenuView;
+
+public interface Animation {
+
+    void play(MenuView menuView);
+
 }

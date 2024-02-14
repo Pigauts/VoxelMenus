@@ -17,14 +17,14 @@ public class PlayerJoinQuitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
-        plugin.getUsers().addUser(event.getPlayer());
+        plugin.getPlayers().addUser(event.getPlayer());
 
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
 
-        plugin.getUsers().removeUser(event.getPlayer());
+        plugin.getPlayers().removeUser(event.getPlayer());
 
     }
 

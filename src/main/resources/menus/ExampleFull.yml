@@ -1,0 +1,78 @@
+type: static
+
+title: 'example menu'
+
+storage: chest
+
+rows: 6
+
+refresh: 200
+
+animation: none
+
+keep-open: false
+
+lock-bottom: false
+
+lock-empty: false
+
+full-inventory: false
+
+on-open:
+  CACHE_INVENTORY: 'example'
+  SOUND: 'mySound'
+  ANIMATION: 'myAnimation'
+
+on-close:
+  SOUND: 'mySound'
+
+on-update: {}
+
+layout:
+  - 'A A A A A A A A A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A A A A A A A A A'
+
+bottom:
+  - 'A A A A A A A A A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A _ _ _ _ _ _ _ A'
+  - 'A A A A A A A A A'
+
+icons: # ['_', 'n'] are reserved for null (empty slots), you can use any other character (abcd1234*#@&)
+  A:
+    material: black stained glass pane
+    amount: 1
+    name: ' '
+    lore: [""]
+    model-data: -1
+    enchanted: false
+    locked: true
+    functions:
+      - my_function
+      - example_function
+
+  B:
+    material: gray stained glass pane
+
+  C:
+    item: my_custom_item
+
+
+functions:
+  my_function:
+    1:
+      type: simple_condition
+      click: [ LEFT, SHIFT_LEFT ]
+      condition: { }
+      success: { }
+      failure: { }
+      ACTION1: arst
+      ACTION2: arst
+  'a':
+    1:
+      click: [LEFT]
+      ACTION: value

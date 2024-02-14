@@ -1,5 +1,12 @@
-# Dynamic prices
 
+buy-back:
+  allow: true
+  cache: 10
+  interest: 0
+  meta: {}
+
+
+# Dynamic prices
 material-whitelist: true
 
 material-value:

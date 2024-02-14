@@ -4,10 +4,12 @@ import me.pigauts.voxelmenus.config.Config;
 import me.pigauts.voxelmenus.config.FactoryUtil;
 import me.pigauts.voxelmenus.function.ClickFunction;
 import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.menu.button.Button;
-import me.pigauts.voxelmenus.menu.button.SimpleButton;
+import me.pigauts.voxelmenus.menu.MenuSettings;
+import me.pigauts.voxelmenus.menu.widget.Icon;
+import me.pigauts.voxelmenus.menu.widget.Button;
 import me.pigauts.voxelmenus.util.Path;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -15,31 +17,30 @@ import java.util.Map;
 
 public abstract class SimpleMenuFactory implements MenuFactory {
 
-    protected String createName(Config config) {
+    protected String getName(Config config) {
         return config.getName();
     }
 
-    protected String createTitle(Config config) {
-        return config.getColorString("title");
+    protected MenuSettings getSettings(Config config) {
+        InventoryType storage = config.getEnum(InventoryType.class, "storage");
+        if (storage == null) {
+            storage = InventoryType.CHEST;
+        }
+
+        int size = storage.getDefaultSize();
+        if (storage == InventoryType.CHEST) {
+            size = config.getInt("size", 27);
+        }
+
+        return new MenuSettings(storage, size,
+                config.getSecondsInTicks("refresh"),
+                config.getBoolean("keep-open"),
+                config.getBoolean("lock-bottom"),
+                config.getBoolean("lock-empty"));
     }
 
-    protected int createSize(Config config) {
-        return config.getInt("rows") * 9;
-    }
 
-    protected int createRefresh(Config config) {
-        return config.getInt("refresh");
-    }
-
-    protected Function createOpenFunction(Config config) {
-        return FactoryUtil.createFunction(config.getSection("on-open"));
-    }
-
-    protected Function createCloseFunction(Config config) {
-        return FactoryUtil.createFunction(config.getSection("on-close"));
-    }
-
-    protected Map<String, ClickFunction> createCustomFunctions(Config config) {
+    protected Map<String, ClickFunction> getTemplateFunctions(Config config) {
         Map<String, ClickFunction> functions = new HashMap<>();
 
         for (String key : config.getKeys("functions", false)) {
@@ -60,15 +61,18 @@ public abstract class SimpleMenuFactory implements MenuFactory {
         return functions;
     }
 
-    protected Map<String, Button> createCustomButtons(Config config) {
-        Map<String, ClickFunction> functionsByName = createCustomFunctions(config);
-        Map<String, Button> customButtons = new HashMap<>();
+    protected Map<String, Icon> getTemplateIcons(Config config) {
+        Map<String, ClickFunction> functionsByName = getTemplateFunctions(config);
+        Map<String, Icon> customButtons = new HashMap<>();
 
-        for (String key : config.getKeys("items", false)) {
-            ItemStack item = config.getItemStack("items." + key);
-            ClickFunction function = functionsByName.get(config.getString(Path.of("items", key, "function")));
+        System.out.println(config.getName());
 
-            customButtons.put(key, new SimpleButton(item, function));
+        for (String key : config.getKeys("icons", false)) {
+            ItemStack item = config.getItemStack("icons." + key);
+            ClickFunction function = functionsByName.get(config.getString(Path.of("icons", key, "function")));
+            boolean locked = config.getBoolean(Path.of("icons", key, "locked"), true);
+
+            customButtons.put(key, new Button(item, function, locked));
         }
 
         return customButtons;

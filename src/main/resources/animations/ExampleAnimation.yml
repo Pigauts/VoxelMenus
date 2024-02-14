@@ -1,0 +1,43 @@
+# N id is reserved for null (Nothing will change)
+# R id is reserved for reset (resets to the original material)
+# 'inventory' changes the type of all items in the inventory
+# If you try to change a material but the slot is empty nothing will happen
+materials:
+  A: RED_STAINED_GLASS_PANE
+  B: ORANGE_STAINED_GLASS_PANE
+  C: YELLOW_STAINED_GLASS_PANE
+
+#You can type 'PAUSE: 1' to wait an amount of frames(loops)
+
+type: MATERIAL #META
+
+frequency: 3 
+
+repetitions: 3
+
+frames:
+  1:
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+  2:
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+  3:
+    pause: 10
+  4:
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+    - 'A A A A A A A A A'
+
+

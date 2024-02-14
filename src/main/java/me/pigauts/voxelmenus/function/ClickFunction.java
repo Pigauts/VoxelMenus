@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.function;
 
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 import org.bukkit.event.inventory.ClickType;
 
 import java.util.Map;

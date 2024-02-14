@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.function.statement.action;
 
 import me.pigauts.voxelmenus.effect.message.Message;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 public class MessageAction implements Action {
 

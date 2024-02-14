@@ -6,34 +6,20 @@ usage: 'Monkey doesn''t know how to use'
 permission:
   node: menus.skyblock.user
   message: 'You don''t have the permission to use this command'
-
-MAIN:
-  OPEN_MENU: Skyblock
-
-RANK:
-  OPEN_MENU: SbRank
-
-SHOP:
-  OPEN_MENU: SbShop
-
-TEST:
-  args: ['srt', 'arst', 'asts']
-  condition:
-    PERMISSION: 'example.permission'
-    VAULT: 20
-  success:
-    OPEN_MENU: 'ExampleMenu.yml'
-    VAULT_TAKE: 20
-    SOUND: BLOCK_CHEST_OPEN
-    MESSAGE: 'You''ve opened a menu via command and payed 20$'
-
-
-  onItemClick:
-    trigger: CLICK
-    action: [LEFT_CLICK_AIR, LEFT_CLICK_BLOCK]
-    item: 'opening_key'
-    location: none
-    SOUND: BLOCK_CHEST_OPEN
-    MESSAGE: 'You''ve opened a menu via item and so it was free!'
-    OPEN_MENU: 'ExampleMenu.yml'
-    REMOVE_ITEM: 'opening_key'
+function:
+  MESSAGE: '/skyblock help'
+subcommands:
+  main:
+    args: [main]
+    function:
+      OPEN_MENU: Skyblock
+  test:
+    args: [ 'srt', 'arst', 'asts' ]
+    condition:
+      PERMISSION: 'example.permission'
+      VAULT: 20
+    success:
+      OPEN_MENU: 'ExampleDynamic.yml'
+      VAULT_TAKE: 20
+      SOUND: BLOCK_CHEST_OPEN
+      MESSAGE: 'You''ve opened a menu via command and payed 20$'

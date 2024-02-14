@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.effect.message.type;
 
 import me.pigauts.voxelmenus.effect.message.Message;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 import java.util.List;
 

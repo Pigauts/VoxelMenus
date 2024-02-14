@@ -3,10 +3,12 @@ package me.pigauts.voxelmenus.item;
 import me.pigauts.voxelmenus.config.Config;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.List;
 
@@ -20,6 +22,15 @@ public class ItemBuilder {
     private boolean enchanted = false;
     private int modelData = -1;
 
+    public ItemBuilder(Material type) {
+        this.type = type;
+    }
+
+    public ItemBuilder(Material type, int amount) {
+        this.type = type;
+        this.amount = amount;
+    }
+
     public ItemBuilder(Config config) {
         this.type = config.getMaterial("material", Material.DIRT);
         this.amount = config.getInt("amount", 1);
@@ -32,6 +43,14 @@ public class ItemBuilder {
         this.enchanted = config.getBoolean("enchanted", false);
         this.modelData = config.getInt("model-data", -1);
 
+    }
+
+    public static ItemStack createPlayerHead(OfflinePlayer player) {
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
+        skullMeta.setOwningPlayer(player);
+        head.setItemMeta(skullMeta);
+        return head;
     }
 
     public ItemStack build() {

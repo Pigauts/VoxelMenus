@@ -4,6 +4,8 @@ public enum MenuType {
 
     STATIC,
     DYNAMIC,
-    SHOP;
+    SHOP,
+    PAGE,
+    ATLAS;
 
 }

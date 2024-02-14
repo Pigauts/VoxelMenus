@@ -1,37 +1,41 @@
 package me.pigauts.voxelmenus.config.factory.menu;
 
+import me.pigauts.voxelmenus.config.IconLayoutBuilder;
 import me.pigauts.voxelmenus.config.Config;
+import me.pigauts.voxelmenus.config.FactoryUtil;
 import me.pigauts.voxelmenus.menu.Menu;
-import me.pigauts.voxelmenus.menu.button.Button;
+import me.pigauts.voxelmenus.menu.widget.Icon;
 import me.pigauts.voxelmenus.menu.type.StaticMenu;
-
-import java.util.List;
-import java.util.Map;
+import me.pigauts.voxelmenus.menu.meta.MenuMeta;
+import me.pigauts.voxelmenus.menu.meta.SimpleMeta;
 
 public class StaticMenuFactory extends SimpleMenuFactory {
 
     @Override
     public Menu createMenu(Config config) {
+        return new StaticMenu(getName(config), getSettings(config), getMeta(config));
+    }
 
-        Map<String, Button> customButtons = createCustomButtons(config);
-        List<String> layout = config.getLayout("layout");
+    protected String getTitle(Config config) {
+        return config.getColorString("title");
+    }
 
-        int size = createSize(config);
-        Button[] buttons = new Button[size];
+    protected Icon[] getIcons(Config config) {
+        return new IconLayoutBuilder(getTemplateIcons(config)).build(config.getLayout("layout"));
+    }
 
-        for (int i = 0; i < size; i++) {
-            if (layout.size() < size) continue;
-            buttons[i] = customButtons.get(layout.get(i));
-        }
+    protected MenuMeta.MenuFunctions getFunctions(Config config) {
+        return new MenuMeta.MenuFunctions(
+                FactoryUtil.createFunction(config.getSection("on-open")),
+                FactoryUtil.createFunction(config.getSection("on-close")),
+                FactoryUtil.createFunction(config.getSection("on-update")));
+    }
 
-        return new StaticMenu(
-                createName(config),
-                createTitle(config),
-                size,
-                createRefresh(config),
-                createOpenFunction(config),
-                createCloseFunction(config),
-                buttons);
+    protected MenuMeta getMeta(Config config) {
+        return new SimpleMeta(
+                getTitle(config),
+                getIcons(config),
+                getFunctions(config));
     }
 
 }

@@ -51,10 +51,6 @@ public class Config implements ConfigurationSection {
         } catch (IOException e) { }
     }
 
-    public Set<String> getKeys(boolean deep) {
-        return section.getKeys(deep);
-    }
-
     public Map<String, Object> getValues(boolean deep) {
         return section.getValues(deep);
     }
@@ -313,8 +309,9 @@ public class Config implements ConfigurationSection {
     }
 
     public boolean areSections(String... paths) {
-        for (String path : paths)
+        for (String path : paths) {
             if (!isSection(path)) return false;
+        }
         return true;
     }
 
@@ -342,7 +339,12 @@ public class Config implements ConfigurationSection {
         section.setInlineComments(path, comments);
     }
 
+    public Set<String> getKeys(boolean deep) {
+        return section.getKeys(deep);
+    }
+
     public Set<String> getKeys(String path, boolean deep) {
+        if (!section.isConfigurationSection(path)) return Collections.EMPTY_SET;
         return section.getConfigurationSection(path).getKeys(deep);
     }
 
@@ -350,18 +352,22 @@ public class Config implements ConfigurationSection {
         List<Config> sections = new ArrayList<>();
 
         for (String key : getKeys(false)) {
-            if (!areSections(key)) continue;
+            if (!isSection(key)) continue;
             sections.add(getSection(key));
         }
 
         return sections;
     }
 
+    public Config getSection(String path) {
+        return isSection(path) ? new Config(file, getConfigurationSection(path)) : null;
+    }
+
     public List<Config> getSections(String path) {
         List<Config> sections = new ArrayList<>();
 
         for (String keyPath : getKeysPath(path, false)) {
-            if (!areSections(keyPath)) continue;
+            if (!isSection(keyPath)) continue;
             sections.add(getSection(keyPath));
         }
 
@@ -419,7 +425,7 @@ public class Config implements ConfigurationSection {
     }
 
     public <E extends Enum<E>> E getEnum(Class<E> enumClass, String path) {
-        return Helper.getEnum(enumClass, section.getString(path).replace(" ", "_").toUpperCase());
+        return Helper.getEnum(enumClass, section.getString(path, "").replace(" ", "_").toUpperCase());
     }
 
     public <E extends Enum<E>> List<E> getEnumList(Class<E> enumClass, String path) {
@@ -491,10 +497,6 @@ public class Config implements ConfigurationSection {
 
     public UUID getUUID(String path) {
         return UUID.fromString(section.getString(path, ""));
-    }
-
-    public Config getSection(String path) {
-        return new Config(file, getConfigurationSection(path));
     }
 
     public List<String> getLayout(String path) {

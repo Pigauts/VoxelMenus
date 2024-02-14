@@ -2,7 +2,7 @@ package me.pigauts.voxelmenus.command.custom;
 
 import me.pigauts.voxelmenus.command.subordinate.UserCommand;
 import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 import java.util.Arrays;
 

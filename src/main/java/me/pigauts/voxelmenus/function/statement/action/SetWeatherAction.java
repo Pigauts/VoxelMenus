@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.function.statement.action;
 
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 import me.pigauts.voxelmenus.util.Weather;
 import org.bukkit.World;
 

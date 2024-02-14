@@ -1,34 +1,40 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.menu.DynamicButtons;
-import me.pigauts.voxelmenus.menu.button.Button;
-import me.pigauts.voxelmenus.user.MenuPlayer;
+import me.pigauts.voxelmenus.menu.MenuSettings;
+import me.pigauts.voxelmenus.menu.meta.DynamicMeta;
+import me.pigauts.voxelmenus.menu.meta.MenuMeta;
+import me.pigauts.voxelmenus.menu.view.DynamicMenuView;
+import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.player.MenuPlayer;
 
 import java.util.Map;
 
 public class DynamicMenu extends SimpleMenu {
 
-    private final Map<String, DynamicButtons> buttonsByName;
+    private final Map<String, DynamicMeta> metaByName;
 
-    public DynamicMenu(String name, String title, int size, int refreshTicks, Function openFunction, Function closeFunction, Map<String, DynamicButtons> buttonsByName) {
-        super(name, title, size, refreshTicks, openFunction, closeFunction);
-        this.buttonsByName = buttonsByName;
+    public DynamicMenu(String name, MenuSettings settings, Map<String, DynamicMeta> metaByName) {
+        super(name, settings);
+        this.metaByName = metaByName;
     }
 
-    @Override
-    public Button[] getButtons(MenuPlayer player) {
-        for (DynamicButtons buttons : buttonsByName.values()) {
-            if (buttons.condition().isMet(player))
-                return buttons.buttons();
+    public MenuMeta getMeta(MenuPlayer player) {
+        for (DynamicMeta meta : metaByName.values()) {
+            if (meta.getCondition().isMet(player))
+                return meta;
         }
 
-        return buttonsByName.get("default").buttons();
+        return metaByName.get("default");
+    }
+
+    public MenuMeta getMetaByName(String name) {
+        MenuMeta meta = metaByName.get(name);
+        return meta == null ? metaByName.get("default") : meta;
     }
 
     @Override
-    public Button[] getButtonsByName(MenuPlayer player, String name) {
-        return buttonsByName.get(name).buttons();
+    public MenuView createView(MenuPlayer player) {
+        return new DynamicMenuView(this, player);
     }
 
 }

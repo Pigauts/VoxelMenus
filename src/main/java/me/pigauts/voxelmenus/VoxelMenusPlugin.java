@@ -6,15 +6,15 @@ import me.pigauts.voxelmenus.config.FactoryManager;
 import me.pigauts.voxelmenus.effect.animation.AnimationManager;
 import me.pigauts.voxelmenus.effect.message.MessageManager;
 import me.pigauts.voxelmenus.item.ItemManager;
-import me.pigauts.voxelmenus.listener.InventoryClickListener;
+import me.pigauts.voxelmenus.listener.InventoryEventsListener;
 import me.pigauts.voxelmenus.listener.PlayerJoinQuitListener;
 import me.pigauts.voxelmenus.menu.MenuManager;
-import me.pigauts.voxelmenus.user.UserManager;
+import me.pigauts.voxelmenus.player.MenuPlayerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class VoxelMenusPlugin extends JavaPlugin implements VoxelPlugin {
 
-    private final UserManager userManager = new UserManager(this);
+    private final MenuPlayerManager userManager = new MenuPlayerManager(this);
     private final MenuManager menuManager = new MenuManager(this);
     private final ItemManager itemManager = new ItemManager(this);
     private final AnimationManager animationManager = new AnimationManager(this);
@@ -39,10 +39,14 @@ public class VoxelMenusPlugin extends JavaPlugin implements VoxelPlugin {
         createFolder("placeholders");
         createFolder("triggers");
 
+        saveDefaultFile("menus", "ExampleStatic.yml");
         saveDefaultFile("menus", "ExampleDynamic.yml");
+        saveDefaultFile("menus", "ExamplePaged.yml");
+        saveDefaultFile("menus", "ExampleAtlas.yml");
+        saveDefaultFile("menus", "ExampleFull.yml");
 
         registerEvents(new PlayerJoinQuitListener(this));
-        registerEvents(new InventoryClickListener(this));
+        registerEvents(new InventoryEventsListener(this));
 
         itemManager.load();
         menuManager.load();
@@ -61,11 +65,11 @@ public class VoxelMenusPlugin extends JavaPlugin implements VoxelPlugin {
     }
 
 
-    public static VoxelMenusPlugin get() {
+    public static VoxelMenusPlugin getPlugin() {
         return plugin;
     }
 
-    public UserManager getUsers() {
+    public MenuPlayerManager getPlayers() {
         return userManager;
     }
 
