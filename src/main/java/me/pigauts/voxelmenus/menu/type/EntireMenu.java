@@ -1,18 +1,18 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.menu.Menu;
-import me.pigauts.voxelmenus.menu.widget.Icon;
+import me.pigauts.voxelmenus.API.menu.Menu;
+import me.pigauts.voxelmenus.menu.widget.Button;
 import me.pigauts.voxelmenus.menu.view.EntireMenuView;
-import me.pigauts.voxelmenus.menu.view.MenuView;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.menu.MenuView;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 import org.bukkit.event.inventory.InventoryType;
 
 public class EntireMenu<M extends Menu> implements Menu {
 
     private final M topMenu;
-    private final Icon[] contents;
+    private final Button[] contents;
 
-    public EntireMenu(M topMenu, Icon[] contents) {
+    public EntireMenu(M topMenu, Button[] contents) {
         this.topMenu = topMenu;
         this.contents = contents;
     }
@@ -49,7 +49,7 @@ public class EntireMenu<M extends Menu> implements Menu {
         return topMenu;
     }
 
-    public Icon[] getBottomContents() {
+    public Button[] getBottomContents() {
         return contents;
     }
 

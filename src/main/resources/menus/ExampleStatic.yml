@@ -16,14 +16,18 @@ lock-bottom: false
 
 lock-empty: false
 
-full-inventory: true
+bottom-inventory: true
 
-
+backtrack: true
 
 on-open:
   SAVE_INVENTORY: 'player_inventory'
   SOUND: 'mySound'
   ANIMATION: 'myAnimation'
+  '1':
+    if: {}
+    do: {}
+    else: {}
 
 on-close:
   SOUND: 'mySound'
@@ -48,72 +52,37 @@ icons: # ['_', 'n'] are reserved for null (empty slots), you can use any other c
     model-data: -1
     enchanted: false
     locked: true
-    functions:
-      - my_function
-      - example_function
+    functions: #type: simple, conditional, looped
+      looped:
+        repetitions: 10
+        if: {}
+        do: {}
+        else: {}
+
+      input:  #sospended
+        input:
+          '%material%': MATERIAL_SELECTION
+          '%amount%': SIGN_INPUT
+          '%example%': CHAT_INPUT
+        output:
+          OP_COMMAND: 'give %player% %material% %amount%'
+        cancel:
+          MESSAGE: Invalid input
+
+      example:
+        click: [LEFT]
+        SIGN_INPUT: '%example%'
+
+      my_function:
+        click: [ LEFT, SHIFT_LEFT ]
+        conditions: { }
+        success: { }
+        failure: { }
+        ACTION1: arst
+        ACTION2: arst
 
   B:
     material: gray stained glass pane
 
   C:
     item: my_custom_item
-
-
-functions:
-  my_function:
-    1:
-      type: simple_condition
-      click: [ LEFT, SHIFT_LEFT ]
-      condition: { }
-      success: { }
-      failure: { }
-      ACTION1: arst
-      ACTION2: arst
-  'a':
-    1:
-      click: [LEFT]
-      ACTION: value
-
-    2:
-      click: [RIGHT]
-      ACTION: value
-
-    3:
-      click: [SHIFT_LEFT]
-      ACTION: value
-
-    4:
-      click: [SHIFT_RIGHT]
-      ACTION: value
-
-    5:
-      click: [ANY]
-      condition: {}
-      success: {}
-      failure: {}
-
-  'b':
-    1:
-      type: simple_condition
-      click: [LEFT, SHIFT_LEFT]
-      condition: { }
-      success: { }
-      failure: { }
-      ACTION1: arst
-      ACTION2: arst
-
-    2:
-      ACTION1: sart
-
-    3:
-      if: {}
-      do: {}
-      else: {}
-
-    4:
-      click_type: [RIGHT, SHIFT_RIGHT]
-      type: execution
-      ACTION: value
-
-    5:
-      ACTION: value

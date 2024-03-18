@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.item;
 
-import me.pigauts.voxelmenus.config.Config;
+import me.pigauts.voxelmenus.core.config.Config;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;

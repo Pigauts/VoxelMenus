@@ -1,13 +1,13 @@
 package me.pigauts.voxelmenus.util;
 
-import me.pigauts.voxelmenus.menu.widget.Icon;
+import me.pigauts.voxelmenus.menu.widget.Button;
 
 public class Atlas {
 
     private final AtlasCanvas canvas;
-    private final Icon[] icons;
+    private final Button[] icons;
 
-    public Atlas(AtlasCanvas canvas, Icon[] icons) {
+    public Atlas(AtlasCanvas canvas, Button[] icons) {
         this.canvas = canvas;
         this.icons = icons;
     }
@@ -16,7 +16,7 @@ public class Atlas {
         return canvas;
     }
 
-    public Icon[] getIcons() {
+    public Button[] getIcons() {
         return icons;
     }
 }

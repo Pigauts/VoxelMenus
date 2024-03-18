@@ -1,0 +1,284 @@
+package me.pigauts.voxelmenus.player;
+
+import me.pigauts.voxelmenus.API.Function;
+import me.pigauts.voxelmenus.API.MenuPlayer;
+import me.pigauts.voxelmenus.API.menu.Menu;
+import me.pigauts.voxelmenus.API.menu.MenuView;
+import me.pigauts.voxelmenus.Util;
+import me.pigauts.voxelmenus.VoxelPlugin;
+import me.pigauts.voxelmenus.API.event.menu.MenuClickEvent;
+import me.pigauts.voxelmenus.API.event.menu.MenuCloseEvent;
+import me.pigauts.voxelmenus.API.event.menu.MenuOpenEvent;
+import me.pigauts.voxelmenus.item.ItemBuilder;
+import me.pigauts.voxelmenus.menu.MenuUpdateTask;
+import me.pigauts.voxelmenus.message.Title;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
+import java.util.*;
+
+public class VoxelMenuPlayer implements MenuPlayer {
+
+    protected final UUID playerId;
+    private final List<String> flags = new ArrayList<>();
+    private MenuView openView = null;
+    private final PlayerCache cache = new PlayerCache();
+
+    public VoxelMenuPlayer(UUID playerId) {
+        this.playerId = playerId;
+    }
+
+    @Override
+    public UUID getUniqueId() {
+        return playerId;
+    }
+
+    @Override
+    public Player asPlayer() {
+        return Bukkit.getPlayer(playerId);
+    }
+
+    @Override
+    public OfflinePlayer asOfflinePlayer() { return Bukkit.getOfflinePlayer(playerId); }
+
+    @Override
+    public boolean isViewingMenu() {
+        return openView != null;
+    }
+
+    @Override
+    public MenuView getOpenView() {
+        return openView;
+    }
+
+    @Override
+    public <T extends MenuView> T getOpenView(Class<T> viewClass) {
+        return viewClass.isAssignableFrom(openView.getClass()) ? viewClass.cast(openView) : null;
+    }
+
+    @Override
+    public void setOpenView(MenuView view) {
+        this.openView = view;
+    }
+
+    @Override
+    public void openView(MenuView view) {
+        view.open();
+    }
+
+    @Override
+    public List<String> getFlags() {
+        return flags;
+    }
+
+    @Override
+    public void addFlag(String flag) {
+        flags.add(flag);
+    }
+
+    @Override
+    public PlayerCache getCache() {
+        return cache;
+    }
+
+    @Override
+    public void cacheInventory() {
+        cache.cachePlayerInventory(getInventory().getContents());
+    }
+
+    @Override
+    public void restoreInventory() {
+        ItemStack[] contents = cache.getPlayerInventory();
+        if (contents == null) return;
+        getInventory().setContents(contents);
+    }
+
+    @Override
+    public void updateInventory() {
+        asPlayer().updateInventory();
+    }
+
+    @Override
+    public boolean hasFlag(String flag) {
+        return flags.contains(flag);
+    }
+
+    @Override
+    public boolean hasPermission(String permission) {
+        return asPlayer().hasPermission(permission);
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        asPlayer().sendMessage(message);
+    }
+
+    @Override
+    public void sendTitle(Title title) {
+        asPlayer().sendTitle(title.title(), title.subtitle(), title.fadeIn(), title.stay(), title.fadeOut());
+    }
+
+    @Override
+    public void openMenu(Menu menu) {
+        if (menu == null) {
+            System.out.println("Menu is null");
+            return;
+        }
+        if (isViewingMenu() && openView.getMenu() == menu) return;
+
+        MenuView view = menu.createView(this);
+
+        MenuOpenEvent event = new MenuOpenEvent(view);
+        VoxelPlugin.callEvent(event);
+        menu.onOpen(event);
+
+        if (event.isCancelled()) return;
+
+        view.open();
+        MenuUpdateTask.of(view).initiateTask();
+    }
+
+    @Override
+    public void closeView() {
+        if (!isViewingMenu()) return;
+
+        MenuCloseEvent event = new MenuCloseEvent(openView);
+        VoxelPlugin.callEvent(event);
+        openView.getMenu().onClose(event);
+
+        if (event.isCancelled()) return;
+
+        openView.close();
+    }
+
+    @Override
+    public void clickMenu(InventoryClickEvent clickEvent) {
+        if (!isViewingMenu()) return;
+
+        MenuClickEvent event = new MenuClickEvent(openView, clickEvent);
+        VoxelPlugin.callEvent(event);
+        openView.getMenu().onClick(event);
+
+        if (event.isCancelled()) return;
+
+        openView.click(clickEvent);
+    }
+
+    @Override
+    public InventoryView openInventory(Inventory inventory) {
+        return asPlayer().openInventory(inventory);
+    }
+
+    @Override
+    public void closeInventory() {
+        asPlayer().closeInventory();
+    }
+
+    @Override
+    public void openEnderChest() {
+        if (isViewingMenu()) openView = null;
+        Player player = asPlayer();
+        player.openInventory(player.getEnderChest());
+    }
+
+    @Override
+    public void setExp(int amount) {
+        asPlayer().setExp(amount);
+    }
+
+    @Override
+    public void addExp(int amount) {
+        Player player = asPlayer();
+        player.setExp(player.getExp() + amount);
+    }
+
+    @Override
+    public void removeExp(int amount) {
+        addExp(-amount);
+    }
+
+    @Override
+    public void removeFlag(String flag) {
+        flags.remove(flag);
+    }
+
+    @Override
+    public void teleport(Location location) {
+        asPlayer().teleport(location);
+    }
+
+    @Override
+    public void heal(int amount) {
+        Player player = asPlayer();
+        player.setHealth(player.getHealth() + amount);
+    }
+
+    @Override
+    public void damage(int amount) {
+        heal(-amount);
+    }
+
+    @Override
+    public World getWorld() {
+        return asPlayer().getWorld();
+    }
+
+    @Override
+    public Location getLocation() {
+        return asPlayer().getLocation();
+    }
+
+    @Override
+    public PlayerInventory getInventory() {
+        return asPlayer().getInventory();
+    }
+
+    @Override
+    public void performCommand(String command) {
+        Player player = asPlayer();
+        command = command.replace("%player%", player.getName());
+        player.performCommand(command);
+    }
+
+    @Override
+    public void performCommandAsOp(String command) {
+        Player player = asPlayer();
+        command = command.replace("%player%", player.getName());
+        if (player.isOp()) {
+            player.performCommand(command);
+            return;
+        }
+        player.setOp(true);
+        player.performCommand(command);
+        player.setOp(false);
+    }
+
+    @Override
+    public ItemStack getPlayerHead() {
+        return ItemBuilder.createPlayerHead(asOfflinePlayer());
+    }
+
+    @Override
+    public void executeFunction(Function function) {
+        if (function != null) {
+            function.run(this);
+        }
+    }
+
+    @Override
+    public void giveItem(ItemStack... items) {
+        Player player = asPlayer();
+        for (Map.Entry<Integer, ItemStack> entry : player.getInventory().addItem(Util.toNotNullArray(items)).entrySet()) {
+            player.getWorld().dropItemNaturally(player.getLocation(), entry.getValue());
+        }
+    }
+
+}

@@ -6,6 +6,8 @@ refresh: 200
 
 storage: CHEST # CHEST, DROPPER, DISPENSER, HOPPER
 
+rows: 6
+
 size:
   rows: 13
   columns: 9

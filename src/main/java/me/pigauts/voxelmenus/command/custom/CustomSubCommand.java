@@ -1,17 +1,17 @@
 package me.pigauts.voxelmenus.command.custom;
 
 import me.pigauts.voxelmenus.command.subordinate.UserCommand;
-import me.pigauts.voxelmenus.function.Function;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.core.function.FunctionSet;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 
 import java.util.Arrays;
 
 public class CustomSubCommand extends UserCommand {
 
     private final String[] args;
-    private final Function function;
+    private final FunctionSet function;
 
-    public CustomSubCommand(String[] args, Function function) {
+    public CustomSubCommand(String[] args, FunctionSet function) {
         this.args = args;
         this.function = function;
     }

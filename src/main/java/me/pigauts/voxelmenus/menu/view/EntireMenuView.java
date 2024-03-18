@@ -1,10 +1,11 @@
 package me.pigauts.voxelmenus.menu.view;
 
-import me.pigauts.voxelmenus.effect.animation.Animation;
-import me.pigauts.voxelmenus.event.menu.MenuClickEvent;
-import me.pigauts.voxelmenus.menu.Menu;
+import me.pigauts.voxelmenus.API.menu.MenuView;
+import me.pigauts.voxelmenus.animation.Animation;
+import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.type.EntireMenu;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.MenuPlayer;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
@@ -34,8 +35,8 @@ public class EntireMenuView implements MenuView {
     }
 
     @Override
-    public InventoryView getInventory() {
-        return topView.getInventory();
+    public InventoryView getInventoryView() {
+        return topView.getInventoryView();
     }
 
     @Override
@@ -61,27 +62,22 @@ public class EntireMenuView implements MenuView {
         player.getInventory().clear();
 
         getBottomInventory().setContents(menu.getBottomContents());
-
-        onOpen();
     }
 
     @Override
     public void close() {
         topView.close();
-
         player.restoreInventory();
-
-        onClose();
     }
 
     @Override
-    public void onUpdate() {
-        topView.onUpdate();
+    public void update() {
+        topView.update();
     }
 
     @Override
-    public void onClick(MenuClickEvent event) {
-        topView.onClick(event);
+    public void click(InventoryClickEvent event) {
+        topView.click(event);
     }
 
 

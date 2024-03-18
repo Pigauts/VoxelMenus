@@ -1,10 +1,13 @@
 package me.pigauts.voxelmenus.menu.type;
 
+import me.pigauts.voxelmenus.API.MenuType;
+import me.pigauts.voxelmenus.core.builder.StaticMenuBuilder;
+import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.menu.MenuSettings;
-import me.pigauts.voxelmenus.menu.meta.MenuMeta;
-import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.menu.MenuMeta;
+import me.pigauts.voxelmenus.API.menu.MenuView;
 import me.pigauts.voxelmenus.menu.view.StaticMenuView;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 
 public class StaticMenu extends SimpleMenu {
 
@@ -15,7 +18,17 @@ public class StaticMenu extends SimpleMenu {
         this.meta = meta;
     }
 
-    public MenuMeta getMeta() {
+    public static StaticMenu fromConfig(Config config) {
+        if (config == null) return null;
+        return new StaticMenuBuilder(config).build();
+    }
+
+    @Override
+    public MenuType getType() {
+        return MenuType.STATIC;
+    }
+
+    public MenuMeta getMenuMeta() {
         return meta;
     }
 

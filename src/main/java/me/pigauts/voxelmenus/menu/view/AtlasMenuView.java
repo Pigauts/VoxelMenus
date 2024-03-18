@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.menu.view;
 
-import me.pigauts.voxelmenus.menu.meta.MenuMeta;
+import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.menu.type.AtlasMenu;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.util.AtlasPos;
 
 public class AtlasMenuView extends MetaMenuView<AtlasMenu, MenuPlayer> {
@@ -14,7 +14,7 @@ public class AtlasMenuView extends MetaMenuView<AtlasMenu, MenuPlayer> {
     }
 
     @Override
-    public MenuMeta getMenuMeta() {
+    public MenuMeta createMenuMeta() {
         return menu.getMeta(currentPosition);
     }
 

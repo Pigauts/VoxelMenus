@@ -1,10 +1,11 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.menu.Menu;
+import me.pigauts.voxelmenus.API.MenuType;
+import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.MenuSettings;
-import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.API.menu.MenuView;
 import me.pigauts.voxelmenus.menu.view.SimpleView;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 import org.bukkit.event.inventory.InventoryType;
 
 public class SimpleMenu implements Menu {
@@ -24,6 +25,11 @@ public class SimpleMenu implements Menu {
         this.keepOpen = settings.keepOpen();
         this.lockBottom = settings.lockBottom();
         this.lockEmpty = settings.lockEmpty();
+    }
+
+    @Override
+    public MenuType getType() {
+        return MenuType.SIMPLE;
     }
 
     @Override

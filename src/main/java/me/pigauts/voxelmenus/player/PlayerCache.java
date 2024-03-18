@@ -1,6 +1,7 @@
 package me.pigauts.voxelmenus.player;
 
-import me.pigauts.voxelmenus.menu.view.MenuView;
+import me.pigauts.voxelmenus.menu.MenuMeta;
+import me.pigauts.voxelmenus.API.menu.MenuView;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,6 +15,7 @@ public class PlayerCache {
     private final Map<String, ItemStack> itemsCache = new HashMap<>();
     private final Map<String, String> placeholdersCache = new HashMap<>();
     private final Map<String, MenuView> viewsCache = new HashMap<>();
+    private final Map<String, MenuMeta> persistentCache = new HashMap<>();
 
     public void cachePlayerInventory(ItemStack[] playerInventory) {
         this.playerInventory = playerInventory.clone();
@@ -51,12 +53,12 @@ public class PlayerCache {
         itemsCache.remove(name);
     }
 
-    public void cachePlaceholder(String name, String placeholder) {
-        placeholdersCache.put(name, placeholder);
+    public void cachePlaceholder(String placeholder, String value) {
+        placeholdersCache.put(placeholder, value);
     }
 
-    public String getCachedPlaceholder(String name) {
-        return placeholdersCache.get(name);
+    public String getCachedPlaceholder(String placeholder) {
+        return placeholdersCache.get(placeholder);
     }
 
     public void flushPlaceholder(String name) {

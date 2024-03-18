@@ -1,11 +1,10 @@
 package me.pigauts.voxelmenus.item;
 
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.config.Config;
+import me.pigauts.voxelmenus.core.config.Config;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ItemManager {
 
@@ -29,6 +28,23 @@ public class ItemManager {
 
     public ItemStack getItem(String name) {
         return items.get(name);
+    }
+
+    public List<ItemStack> getItems(Collection<String> itemIds) {
+        List<ItemStack> items = new ArrayList<>();
+
+        for (String itemId : itemIds) {
+            ItemStack item = this.items.get(itemId);
+            if (item != null) {
+                items.add(item);
+            }
+        }
+
+        return items;
+    }
+
+    public void registerItem(String id, ItemStack item) {
+        items.put(id, item);
     }
 
 }

@@ -1,75 +1,79 @@
 package me.pigauts.voxelmenus.menu.view;
 
 import me.pigauts.voxelmenus.API.Menus;
-import me.pigauts.voxelmenus.event.menu.MenuClickEvent;
-import me.pigauts.voxelmenus.menu.Menu;
-import me.pigauts.voxelmenus.menu.type.SimpleMenu;
-import me.pigauts.voxelmenus.menu.widget.Icon;
-import me.pigauts.voxelmenus.menu.meta.MenuMeta;
-import me.pigauts.voxelmenus.player.MenuPlayer;
-import org.bukkit.inventory.Inventory;
+import me.pigauts.voxelmenus.API.menu.Menu;
+import me.pigauts.voxelmenus.menu.MenuMeta;
+import me.pigauts.voxelmenus.API.menu.view.MetaView;
+import me.pigauts.voxelmenus.menu.widget.Button;
+import me.pigauts.voxelmenus.API.MenuPlayer;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class MetaMenuView<M extends Menu, P extends MenuPlayer> extends SimpleView<M, P> {
+public abstract class MetaMenuView<M extends Menu, P extends MenuPlayer> extends SimpleView<M, P> implements MetaView<M, P> {
 
-    private MenuMeta meta;
+    protected @NotNull MenuMeta meta;
 
-    public MetaMenuView(M menu, P player) {
-        super(menu, player);
+    public MetaMenuView(@NotNull M menu, @NotNull P player) {
+        this(menu, player, MenuMeta.EMPTY_META);
     }
 
-    public abstract MenuMeta getMenuMeta();
-
-    @Override
-    public Inventory createInventory() {
-        Inventory inventory = Menus.createInventory(meta.getTitle(), menu.getStorage(), menu.getSize());
-        inventory.setContents(meta.getIcons());
-
-        return inventory;
+    public MetaMenuView(@NotNull M menu, @NotNull P player, @NotNull MenuMeta meta) {
+        super(menu, player, Menus.createInventory(menu, meta));
+        this.meta = meta;
     }
 
     @Override
     public void open() {
-        meta = getMenuMeta();
         super.open();
-
         player.executeFunction(meta.getOpenFunction());
     }
 
     @Override
-    public void onClose() {
+    public void close() {
+        super.close();
         player.executeFunction(meta.getCloseFunction());
     }
 
     @Override
-    public void onUpdate() {
-        this.meta = getMenuMeta();
-        getTopInventory().setContents(meta.getIcons());
-
+    public void update() {
+        inventory.setContents(meta.getButtons());
+        player.updateInventory();
         player.executeFunction(meta.getUpdateFunction());
     }
 
     @Override
-    public void onClick(MenuClickEvent event) {
+    public void click(InventoryClickEvent event) {
         int slot = event.getRawSlot();
 
         if (slot >= 0 && slot < menu.getSize()) {
-            Icon button = meta.getIcon(slot);
+            Button button = meta.getButton(slot);
 
             if (button != null) {
-                button.onClick(event);
+                button.click(player, event);
                 return;
             }
 
             if (menu.lockEmpty()) {
-                event.cancelClickEvent(true);
+                event.setCancelled(true);
             }
 
             return;
         }
 
         if (menu.lockBottom()) {
-            event.cancelClickEvent(true);
+            event.setCancelled(true);
         }
+    }
+
+    @Override
+    public MenuMeta getMenuMeta() {
+        return meta;
+    }
+
+    @Override
+    public void setMenuMeta(@NotNull MenuMeta meta) {
+        if (meta == null) return;
+        this.meta = meta;
     }
 
 }

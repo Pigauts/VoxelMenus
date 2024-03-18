@@ -1,0 +1,50 @@
+example-chat:
+  type: chat
+  message: 'This is the message'
+
+example-json:
+  type: json
+  message: 'atrnshkbtneiarst'
+
+example-title:
+  title: '&4&l%error_name%'
+  subtitle: '&c&l%error%'
+  fade-in: 1
+  stay: 20
+  fade-out: 1
+
+title-animation:
+  frequency: 1
+  frames:
+    1:
+      title: ''
+      subtitle: ''
+      fade-in: 1
+    2:
+      title: ''
+      subtitle: ''
+      stay: 20
+    3:
+      title: ''
+      subtitle: ''
+      fade-out: 1
+
+example-boss-bar:
+  title: ''
+  color: red
+  style: solid
+  frequency: 10
+  beginning-progress: 1.0
+  # duration (in ticks) = frequency * progression list size
+  # 0.00 is no progress while 1.00 is max progress
+  progression:
+    - '-0.1' # negative number to decrease progress
+    - '-0.1' # positive number to increase progress
+    - '-0.1' # 0 for no change
+    - '-0.1'
+    - '-0.1'
+    - '-0.1'
+    - '-0.1'
+    - '-0.1'
+    - '-0.1'
+    - '-0.1'

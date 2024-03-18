@@ -1,15 +1,13 @@
 package me.pigauts.voxelmenus.menu;
 
-import me.pigauts.voxelmenus.VoxelMenusPlugin;
 import me.pigauts.voxelmenus.VoxelPlugin;
-import me.pigauts.voxelmenus.event.menu.MenuUpdateEvent;
-import me.pigauts.voxelmenus.menu.view.MenuView;
-import me.pigauts.voxelmenus.player.MenuPlayer;
-import org.bukkit.scheduler.BukkitRunnable;
+import me.pigauts.voxelmenus.API.event.menu.MenuUpdateEvent;
+import me.pigauts.voxelmenus.API.menu.MenuView;
+import me.pigauts.voxelmenus.API.MenuPlayer;
+import me.pigauts.voxelmenus.core.runnable.MenusRunnable;
 
-public class MenuUpdateTask extends BukkitRunnable {
 
-    private static final VoxelMenusPlugin plugin = VoxelMenusPlugin.getPlugin();
+public class MenuUpdateTask extends MenusRunnable {
 
     private final MenuPlayer player;
     private final MenuView view;
@@ -36,8 +34,7 @@ public class MenuUpdateTask extends BukkitRunnable {
     }
 
     public void initiateTask() {
-        int refresh = view.getMenu().getRefresh();
-        runTaskTimer(plugin, refresh, refresh);
+        runTaskTimer(view.getMenu().getRefresh());
     }
 
     public static MenuUpdateTask of(MenuView view) {

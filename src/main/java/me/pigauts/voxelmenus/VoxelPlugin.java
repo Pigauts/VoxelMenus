@@ -1,17 +1,18 @@
 package me.pigauts.voxelmenus;
 
-import me.pigauts.voxelmenus.config.Config;
+import me.pigauts.voxelmenus.core.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface VoxelPlugin extends Plugin {
 
@@ -19,7 +20,7 @@ public interface VoxelPlugin extends Plugin {
         Bukkit.getPluginManager().callEvent(event);
     }
 
-    default Config getConfig(String... path) {
+    default Config getConfig(String path) {
         return new Config(getFile(path));
     }
 
@@ -27,17 +28,18 @@ public interface VoxelPlugin extends Plugin {
         getDataFolder().mkdirs();
     }
 
-    default File getFile(String... path) {
-        return new File(getDataFolder(), Helper.buildPath(path));
+    default File getFile(String path) {
+        return new File(getDataFolder(), path);
     }
 
-    default void createFolder(String... path) {
+    default void createFolder(String path) {
         getFile(path).mkdirs();
     }
 
-    default void saveDefaultFile(String... path) {
-        if (!getFile(path).exists())
-            saveResource(Helper.buildPath(path), false);
+    default void createFile(String path) {
+        if (!getFile(path).exists()) {
+            saveResource(path, false);
+        }
     }
 
     default void registerEvents(Listener listener) {
@@ -49,8 +51,8 @@ public interface VoxelPlugin extends Plugin {
 //        command.setExecutor(manager);
 //    }
 
-    default Set<File> getFiles(String... path) {
-        Set<File> fileList = new HashSet<>();
+    default List<File> getFiles(String path) {
+        List<File> fileList = new ArrayList<>();
         try {
             Files.walk(getFile(path).toPath())
                     .filter(Files::isRegularFile)
@@ -62,16 +64,21 @@ public interface VoxelPlugin extends Plugin {
         return fileList;
     }
 
-    default Set<Config> getConfigs(String... path) {
+    default List<Config> getConfigs(String path) {
 
-        Set<Config> configs = new HashSet<>();
+        List<Config> configs = new ArrayList<>();
 
         for (File file : getFiles(path)) {
             if (!file.getName().toLowerCase().endsWith(".yml")) continue;
+
             configs.add(new Config(file));
         }
 
         return configs;
+    }
+
+    default void disable() {
+        getServer().getPluginManager().disablePlugin(this);
     }
 
 }

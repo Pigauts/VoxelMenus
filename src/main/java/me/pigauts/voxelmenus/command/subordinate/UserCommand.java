@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.command.subordinate;
 
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.HumanEntity;
 

@@ -1,21 +1,26 @@
 package me.pigauts.voxelmenus.menu.type;
 
+import me.pigauts.voxelmenus.API.MenuType;
 import me.pigauts.voxelmenus.menu.MenuSettings;
-import me.pigauts.voxelmenus.menu.meta.AtlasMeta;
-import me.pigauts.voxelmenus.menu.meta.MenuMeta;
+import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.menu.view.AtlasMenuView;
-import me.pigauts.voxelmenus.menu.view.MenuView;
-import me.pigauts.voxelmenus.player.MenuPlayer;
+import me.pigauts.voxelmenus.API.menu.MenuView;
+import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.util.AtlasCanvas;
 import me.pigauts.voxelmenus.util.AtlasPos;
 
 public class AtlasMenu extends StaticMenu {
 
-    private AtlasMeta layout;
+    private AtlasMenuMeta layout;
     private AtlasPos startingPosition;
 
     public AtlasMenu(String name, MenuSettings settings, MenuMeta meta) {
         super(name, settings, meta);
+    }
+
+    @Override
+    public MenuType getType() {
+        return MenuType.ATLAS;
     }
 
     public AtlasPos getStartingPosition() {
