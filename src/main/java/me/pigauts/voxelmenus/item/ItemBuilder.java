@@ -1,6 +1,7 @@
 package me.pigauts.voxelmenus.item;
 
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -35,7 +36,7 @@ public class ItemBuilder {
         this.type = config.getMaterial("material", Material.DIRT);
         this.amount = config.getInt("amount", 1);
 
-        if (config.isSet("name")) this.name = config.getColorString("name");
+        if (config.isSet("name")) this.name = config.getString("name");
         if (config.isSet("lore")) {
             this.lore = config.getStringList("lore");
             this.lore.replaceAll(string -> ChatColor.translateAlternateColorCodes('&', string));

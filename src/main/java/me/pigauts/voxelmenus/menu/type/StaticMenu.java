@@ -2,7 +2,7 @@ package me.pigauts.voxelmenus.menu.type;
 
 import me.pigauts.voxelmenus.API.MenuType;
 import me.pigauts.voxelmenus.core.builder.StaticMenuBuilder;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.menu.MenuSettings;
 import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.API.menu.MenuView;
@@ -18,7 +18,7 @@ public class StaticMenu extends SimpleMenu {
         this.meta = meta;
     }
 
-    public static StaticMenu fromConfig(Config config) {
+    public static StaticMenu fromConfig(ConfigSection config) {
         if (config == null) return null;
         return new StaticMenuBuilder(config).build();
     }

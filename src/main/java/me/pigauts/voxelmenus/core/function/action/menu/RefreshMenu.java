@@ -8,7 +8,7 @@ public class RefreshMenu implements Action {
     @Override
     public void execute(MenuPlayer player) {
         if (player.isViewingMenu()) {
-            player.getOpenView().onUpdate();
+            player.getOpenView().refresh();
         }
     }
 

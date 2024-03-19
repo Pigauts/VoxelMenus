@@ -1,5 +1,6 @@
 package me.pigauts.voxelmenus.menu.view;
 
+import me.pigauts.voxelmenus.API.MenuAction;
 import me.pigauts.voxelmenus.API.Menus;
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.MenuMeta;
@@ -25,20 +26,20 @@ public abstract class MetaMenuView<M extends Menu, P extends MenuPlayer> extends
     @Override
     public void open() {
         super.open();
-        player.executeFunction(meta.getOpenFunction());
+        player.executeFunction(meta.getFunction(MenuAction.OPEN));
     }
 
     @Override
     public void close() {
         super.close();
-        player.executeFunction(meta.getCloseFunction());
+        player.executeFunction(meta.getFunction(MenuAction.CLOSE));
     }
 
     @Override
     public void update() {
         inventory.setContents(meta.getButtons());
         player.updateInventory();
-        player.executeFunction(meta.getUpdateFunction());
+        player.executeFunction(meta.getFunction(MenuAction.UPDATE));
     }
 
     @Override

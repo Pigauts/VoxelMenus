@@ -1,16 +1,16 @@
 package me.pigauts.voxelmenus.API.event.config;
 
+import me.pigauts.voxelmenus.animation.Animation;
 import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.core.event.ConfigFactoryEvent;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
-import me.pigauts.voxelmenus.core.function.condition.Condition;
 import org.bukkit.event.HandlerList;
 
-public class ConditionLoadEvent extends ConfigFactoryEvent<Condition> {
+public class AnimationLoadEvent extends ConfigFactoryEvent<Animation> {
 
     private final static HandlerList HANDLERS = new HandlerList();
 
-    public ConditionLoadEvent(Config config, ConfigFactory<Condition> factory) {
+    public AnimationLoadEvent(Config config, ConfigFactory<Animation> factory) {
         super(config, factory);
     }
 

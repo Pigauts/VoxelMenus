@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.menu.widget;
 
 import me.pigauts.voxelmenus.API.Function;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.util.Flags;
 import me.pigauts.voxelmenus.util.Pair;
 import me.pigauts.voxelmenus.core.holder.Placeholder;
@@ -27,7 +27,7 @@ public class Entry extends Button {
         this.placeholders = placeholders;
     }
 
-    public static Entry create(Config config) {
+    public static Entry create(ConfigSection config) {
         List<Placeholder> placeholders = new ArrayList<>();
         for (Pair<String, String> pair : config.getStringPairList("placeholders")) {
             placeholders.add(new Placeholder(pair.key(), pair.value()));

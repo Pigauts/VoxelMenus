@@ -7,7 +7,7 @@ import me.pigauts.voxelmenus.menu.type.EntireMenu;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -25,6 +25,16 @@ public class EntireMenuView implements MenuView {
     }
 
     @Override
+    public @Nullable MenuView getPreviousView() {
+        return topView.getPreviousView();
+    }
+
+    @Override
+    public void setPreviousView(MenuView previousView) {
+        topView.setPreviousView(previousView);
+    }
+
+    @Override
     public Menu getMenu() {
         return topView.getMenu();
     }
@@ -35,18 +45,8 @@ public class EntireMenuView implements MenuView {
     }
 
     @Override
-    public InventoryView getInventoryView() {
-        return topView.getInventoryView();
-    }
-
-    @Override
-    public Inventory getTopInventory() {
-        return topView.getTopInventory();
-    }
-
-    @Override
-    public Inventory getBottomInventory() {
-        return topView.getBottomInventory();
+    public Inventory getInventory() {
+        return topView.getInventory();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EntireMenuView implements MenuView {
         player.cacheInventory();
         player.getInventory().clear();
 
-        getBottomInventory().setContents(menu.getBottomContents());
+        player.getInventory().setContents(menu.getBottomContents());
     }
 
     @Override
@@ -73,6 +73,16 @@ public class EntireMenuView implements MenuView {
     @Override
     public void update() {
         topView.update();
+    }
+
+    @Override
+    public void refresh() {
+
+    }
+
+    @Override
+    public void back() {
+
     }
 
     @Override

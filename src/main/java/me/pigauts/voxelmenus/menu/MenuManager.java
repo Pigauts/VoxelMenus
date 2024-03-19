@@ -2,7 +2,7 @@ package me.pigauts.voxelmenus.menu;
 
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class MenuManager {
     }
 
     public void load() {
-        for (Config config : plugin.getConfigs("menus")) {
+        for (ConfigSection config : plugin.getConfigs("menus")) {
             Menu menu = Factories.createMenu(config);
             if (menu == null) continue;
 

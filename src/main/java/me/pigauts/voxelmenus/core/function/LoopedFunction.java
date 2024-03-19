@@ -2,7 +2,7 @@ package me.pigauts.voxelmenus.core.function;
 
 import me.pigauts.voxelmenus.API.Function;
 import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 
 public class LoopedFunction implements Function {
 
@@ -21,7 +21,7 @@ public class LoopedFunction implements Function {
         }
     }
 
-    public static Function fromConfig(Config config) {
+    public static Function fromConfig(ConfigSection config) {
         if (config == null) return null;
         return new LoopedFunction(SimpleFunction.fromConfig(config), config.getInt("repetitions"));
     }

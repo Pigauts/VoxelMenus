@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.API.factory;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
 import me.pigauts.voxelmenus.menu.widget.entries.MenuEntries;
 
@@ -8,6 +8,6 @@ import me.pigauts.voxelmenus.menu.widget.entries.MenuEntries;
 public interface EntriesFactory extends ConfigFactory<MenuEntries> {
 
     @Override
-    MenuEntries create(Config config);
+    MenuEntries create(ConfigSection config);
 
 }

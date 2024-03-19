@@ -71,6 +71,7 @@ public class VoxelMenuPlayer implements MenuPlayer {
 
     @Override
     public void openView(MenuView view) {
+        if (view == null) return;
         view.open();
     }
 

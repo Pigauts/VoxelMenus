@@ -8,9 +8,8 @@ public class ClearMenu implements Action {
 
     @Override
     public void execute(MenuPlayer player) {
-        MenuView view = player.getOpenView();
-        if (view != null) {
-            view.getTopInventory().clear();
+        if (player.isViewingMenu()) {
+            player.getOpenView().getInventory().clear();
         }
     }
 

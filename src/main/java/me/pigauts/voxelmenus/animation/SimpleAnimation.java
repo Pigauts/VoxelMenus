@@ -16,7 +16,7 @@ public abstract class SimpleAnimation implements Animation {
     @Override
     public void play(MenuView view) {
 
-        onUpdate(view.getInventoryView().getTopInventory(), 1);
+//        onUpdate(view.getInventoryView().getTopInventory(), 1);
 
     }
 

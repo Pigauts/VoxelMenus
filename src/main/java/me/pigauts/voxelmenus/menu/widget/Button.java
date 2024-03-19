@@ -3,6 +3,7 @@ package me.pigauts.voxelmenus.menu.widget;
 import me.pigauts.voxelmenus.API.Function;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import me.pigauts.voxelmenus.item.ItemBuilder;
 import org.bukkit.event.inventory.ClickType;

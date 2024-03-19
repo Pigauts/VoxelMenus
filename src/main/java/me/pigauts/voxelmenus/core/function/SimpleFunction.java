@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.core.function;
 
 import me.pigauts.voxelmenus.API.Function;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.function.action.Action;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.core.function.action.ActionSet;
@@ -14,7 +14,7 @@ public class SimpleFunction implements Function {
         this.action = action;
     }
 
-    public static SimpleFunction fromConfig(Config config) {
+    public static SimpleFunction fromConfig(ConfigSection config) {
         if (config == null) return null;
         return new SimpleFunction(ActionSet.fromConfig(config));
     }

@@ -3,6 +3,7 @@ package me.pigauts.voxelmenus.core.function.condition;
 import me.pigauts.voxelmenus.Util;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +25,7 @@ public class ConditionSet implements Condition {
         List<Condition> conditions = new ArrayList<>();
 
         for (String key : config.getKeys(false)) {
-            Condition condition = Factories.createCondition(config, key);
+            Condition condition = config.getAtKey(Factories::createCondition, key);
             if (condition != null) {
                 conditions.add(condition);
             }

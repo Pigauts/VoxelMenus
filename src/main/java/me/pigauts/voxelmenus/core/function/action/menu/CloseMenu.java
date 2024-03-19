@@ -7,7 +7,7 @@ public class CloseMenu implements Action {
 
     @Override
     public void execute(MenuPlayer player) {
-        player.closeMenu();
+        player.closeView();
     }
 
 }

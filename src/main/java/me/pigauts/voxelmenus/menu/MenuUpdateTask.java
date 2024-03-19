@@ -30,7 +30,7 @@ public class MenuUpdateTask extends MenusRunnable {
 
         if (event.isCancelled()) return;
 
-        view.onUpdate();
+        view.update();
     }
 
     public void initiateTask() {

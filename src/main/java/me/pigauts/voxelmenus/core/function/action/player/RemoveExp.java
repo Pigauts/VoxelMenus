@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.core.function.action.player;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 
 public class RemoveExp extends AddExp {
 
@@ -8,7 +8,7 @@ public class RemoveExp extends AddExp {
         super(-amount);
     }
 
-    public RemoveExp(Config config) {
+    public RemoveExp(ConfigSection config) {
         this(config.getInt("REMOVE_EXP"));
     }
 

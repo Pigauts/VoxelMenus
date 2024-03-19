@@ -1,10 +1,9 @@
 package me.pigauts.voxelmenus.util;
 
 import me.pigauts.voxelmenus.Util;
-import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.core.builder.MenuBuilder;
+import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.menu.widget.Button;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,11 +13,11 @@ public class MenuLayout implements Iterable<String> {
 
     private final List<String> keys = new ArrayList<>();
 
-    public static MenuLayout fromConfig(Config config, String path) {
+    public static MenuLayout fromConfig(Config config) {
         if (config == null) return null;
         MenuLayout layout = new MenuLayout();
 
-        for (String row : config.getStringList(path)) {
+        for (String row : config.getStringList()) {
             for (String key : row.split(" ")) {
                 if (Util.NULL_CHARACTERS.contains(key)) {
                     layout.add(null);

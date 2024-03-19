@@ -1,6 +1,10 @@
 package me.pigauts.voxelmenus.core.builder;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.API.Function;
+import me.pigauts.voxelmenus.API.MenuAction;
+import me.pigauts.voxelmenus.core.collection.IdMap;
+import me.pigauts.voxelmenus.core.collection.IdMapImpl;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.function.FunctionSet;
 import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.menu.type.StaticMenu;
@@ -9,17 +13,14 @@ import me.pigauts.voxelmenus.util.MenuLayout;
 import org.apache.commons.lang.Validate;
 import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
 public class StaticMenuBuilder extends MenuBuilder<StaticMenu> {
 
     protected String title = "NOT SET";
-    protected FunctionSet openFunction;
-    protected FunctionSet closeFunction;
-    protected FunctionSet refreshFunction;
     protected Button[] buttons;
+    protected final IdMap<Function> functions = new IdMapImpl<>();
 
     public StaticMenuBuilder(String name) {
         super(name);
@@ -36,23 +37,23 @@ public class StaticMenuBuilder extends MenuBuilder<StaticMenu> {
         this.setTitle(title);
     }
 
-    public StaticMenuBuilder(@NotNull Config config) {
+    public StaticMenuBuilder(@NotNull ConfigSection config) {
         super(config);
         title = config.getNotNull(config::getColorString, "title");
-        openFunction = config.getAtSection(FunctionSet::fromConfig, "on-open");
-        closeFunction = config.getAtSection(FunctionSet::fromConfig, "on-close");
-        refreshFunction = config.getAtSection(FunctionSet::fromConfig, "on-refresh");
         buttons = config.getAtKey(MenuLayout::fromConfig, "layout").apply(this);
+        for (String menuAction : MenuAction.values()) {
+            if (!config.isSet(menuAction)) continue;
+            functions.put(menuAction, config.getAtSection(FunctionSet::fromConfig, menuAction));
+        }
     }
 
     @Override
     public StaticMenu build() {
-        MenuMeta meta = new MenuMetaImpl(title, buttons, new MenuFunctions(openFunction, closeFunction, refreshFunction));
-        return new StaticMenu(name, getSettings(), meta);
+        return new StaticMenu(name, getSettings(), getMeta());
     }
 
     public MenuMeta getMeta() {
-        return new MenuMetaImpl(title, buttons, new MenuFunctions(openFunction, closeFunction, refreshFunction));
+        return new MenuMeta(title, buttons, functions);
     }
 
     @Override
@@ -69,36 +70,6 @@ public class StaticMenuBuilder extends MenuBuilder<StaticMenu> {
     public StaticMenuBuilder setTitle(@NotNull String title) {
         Validate.notNull(title, "Title cannot be null");
         this.title = title;
-        return this;
-    }
-
-    @Nullable
-    public FunctionSet getOpenFunction() {
-        return openFunction;
-    }
-
-    public StaticMenuBuilder setOpenFunction(@Nullable FunctionSet openFunction) {
-        this.openFunction = openFunction;
-        return this;
-    }
-
-    @Nullable
-    public FunctionSet getCloseFunction() {
-        return closeFunction;
-    }
-
-    public StaticMenuBuilder setCloseFunction(@Nullable FunctionSet closeFunction) {
-        this.closeFunction = closeFunction;
-        return this;
-    }
-
-    @Nullable
-    public FunctionSet getRefreshFunction() {
-        return refreshFunction;
-    }
-
-    public StaticMenuBuilder setRefreshFunction(@Nullable FunctionSet refreshFunction) {
-        this.refreshFunction = refreshFunction;
         return this;
     }
 

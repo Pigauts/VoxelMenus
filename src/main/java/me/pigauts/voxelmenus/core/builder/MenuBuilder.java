@@ -3,7 +3,7 @@ package me.pigauts.voxelmenus.core.builder;
 import me.pigauts.voxelmenus.API.MenusPlugin;
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
 import me.pigauts.voxelmenus.animation.Animation;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.MenuSettings;
 import me.pigauts.voxelmenus.menu.widget.Button;
@@ -40,7 +40,7 @@ public abstract class MenuBuilder<T extends Menu> {
         this.size = storage.getDefaultSize();
     }
 
-    public MenuBuilder(Config config) {
+    public MenuBuilder(ConfigSection config) {
         name = config.getName();
         storage = config.getNotNull(config::getInventory, "storage");
         if (storage == InventoryType.CHEST) {

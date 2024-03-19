@@ -1,11 +1,9 @@
 package me.pigauts.voxelmenus.message.type;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.message.Message;
 import me.pigauts.voxelmenus.message.Title;
 import me.pigauts.voxelmenus.API.MenuPlayer;
-import org.apache.commons.lang.Validate;
-import org.jetbrains.annotations.NotNull;
 
 public class TitleMessage implements Message {
 
@@ -19,7 +17,7 @@ public class TitleMessage implements Message {
         this(new Title(title, subtitle, fadeIn, stay, fadeOut));
     }
 
-    public static TitleMessage fromConfig(Config config) {
+    public static TitleMessage fromConfig(ConfigSection config) {
         if (config == null) return null;
         return new TitleMessage(Title.fromConfig(config));
     }

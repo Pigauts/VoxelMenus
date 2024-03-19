@@ -31,12 +31,12 @@ public class SimpleView<M extends Menu, P extends MenuPlayer> implements MenuVie
     }
 
     @Override
-    public MenuView getPrevious() {
+    public MenuView getPreviousView() {
         return previousView;
     }
 
     @Override
-    public void setPrevious(MenuView previousView) {
+    public void setPreviousView(MenuView previousView) {
         this.previousView = previousView;
     }
 
@@ -77,6 +77,11 @@ public class SimpleView<M extends Menu, P extends MenuPlayer> implements MenuVie
 
     @Override
     public void refresh() { }
+
+    @Override
+    public void back() {
+        player.openView(previousView);
+    }
 
     @Override
     public void click(InventoryClickEvent event) { }

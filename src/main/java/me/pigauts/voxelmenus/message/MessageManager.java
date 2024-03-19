@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.message;
 
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class MessageManager {
     }
 
     public void load() {
-        for (Config config : plugin.getConfigs("messages")) {
+        for (ConfigSection config : plugin.getConfigs("messages")) {
 
             for (String key : config.getKeys(false)) {
                 Message message = Factories.createMessage(config.getSection(key));

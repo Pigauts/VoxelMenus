@@ -2,12 +2,12 @@ package me.pigauts.voxelmenus.API.factory;
 
 import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
-import me.pigauts.voxelmenus.core.function.condition.Condition;
+import org.bukkit.inventory.ItemStack;
 
 @FunctionalInterface
-public interface ConditionFactory extends ConfigFactory<Condition> {
+public interface ItemFactory extends ConfigFactory<ItemStack> {
 
     @Override
-    Condition create(Config config);
+    ItemStack create(Config config);
 
 }

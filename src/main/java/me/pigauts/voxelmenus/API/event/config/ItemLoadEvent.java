@@ -3,14 +3,14 @@ package me.pigauts.voxelmenus.API.event.config;
 import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.core.event.ConfigFactoryEvent;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
-import me.pigauts.voxelmenus.core.function.condition.Condition;
 import org.bukkit.event.HandlerList;
+import org.bukkit.inventory.ItemStack;
 
-public class ConditionLoadEvent extends ConfigFactoryEvent<Condition> {
+public class ItemLoadEvent extends ConfigFactoryEvent<ItemStack> {
 
     private final static HandlerList HANDLERS = new HandlerList();
 
-    public ConditionLoadEvent(Config config, ConfigFactory<Condition> factory) {
+    public ItemLoadEvent(Config config, ConfigFactory<ItemStack> factory) {
         super(config, factory);
     }
 

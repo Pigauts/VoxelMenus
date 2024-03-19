@@ -1,6 +1,5 @@
 package me.pigauts.voxelmenus.core.function.action.player;
 
-import me.pigauts.voxelmenus.core.config.Config;
 import me.pigauts.voxelmenus.core.function.action.Action;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 
@@ -10,10 +9,6 @@ public class ExecuteCommand implements Action {
 
     public ExecuteCommand(String command) {
         this.command = command;
-    }
-
-    public ExecuteCommand(Config config) {
-        this(config.getString("COMMAND"));
     }
 
     @Override

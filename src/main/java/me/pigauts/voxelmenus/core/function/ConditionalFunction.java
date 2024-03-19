@@ -2,6 +2,7 @@ package me.pigauts.voxelmenus.core.function;
 
 import me.pigauts.voxelmenus.API.Function;
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.function.action.Action;
 import me.pigauts.voxelmenus.core.function.action.ActionSet;
 import me.pigauts.voxelmenus.core.function.condition.Condition;

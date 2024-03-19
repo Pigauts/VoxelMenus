@@ -3,6 +3,7 @@ package me.pigauts.voxelmenus.core.function;
 import me.pigauts.voxelmenus.API.Function;
 import me.pigauts.voxelmenus.Util;
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import org.jetbrains.annotations.Nullable;
@@ -22,16 +23,16 @@ public class FunctionSet implements Function {
     @Nullable
     public static FunctionSet fromConfig(Config config) {
         if (config == null) return null;
-        List<Function> statements = new ArrayList<>();
+        List<Function> functions = new ArrayList<>();
 
-        for (Config subSection : config.getSections()) {
-            Function statement = Factories.createFunction(subSection);
-            if (statement != null) {
-                statements.add(statement);
+        for (Config subSection : config.getSubSections()) {
+            Function function = Factories.createFunction(subSection);
+            if (function != null) {
+                functions.add(function);
             }
         }
 
-        return statements.isEmpty() ? null : new FunctionSet(statements);
+        return functions.isEmpty() ? null : new FunctionSet(functions);
     }
 
     public void run(MenuPlayer user) {

@@ -16,26 +16,20 @@ import java.util.UUID;
 public class PlayerManager {
 
     private final VoxelMenusPlugin plugin;
-
-    private PlayerFactory userFactory = (player) -> new MenuPlayer(player.getUniqueId());
-
-    private final Map<UUID, MenuPlayer> usersByUUID = new HashMap<>();
+    private final Map<UUID, MenuPlayer> players = new HashMap<>();
 
     public PlayerManager(VoxelMenusPlugin plugin) {
         this.plugin = plugin;
     }
 
     public void load() {
-        for (Player player : Bukkit.getOnlinePlayers())
-            usersByUUID.put(player.getUniqueId(), new MenuPlayer(player.getUniqueId()));
-    }
-
-    public void setUserFactory(@NotNull PlayerFactory userFactory) {
-        this.userFactory = userFactory;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            players.put(player.getUniqueId(), plugin.getPlayerFactory().create(player));
+        }
     }
 
     public MenuPlayer getPlayer(UUID userId) {
-        return usersByUUID.get(userId);
+        return players.get(userId);
     }
 
     public MenuPlayer getPlayer(HumanEntity humanEntity) {
@@ -43,11 +37,11 @@ public class PlayerManager {
     }
 
     public void addUser(MenuPlayer user) {
-        usersByUUID.put(user.getUniqueId(), user);
+        players.put(user.getUniqueId(), user);
     }
 
     public void addUser(Player player) {
-        usersByUUID.put(player.getUniqueId(), userFactory.create(player));
+        players.put(player.getUniqueId(), plugin.getPlayerFactory().create(player));
     }
 
 
@@ -60,11 +54,11 @@ public class PlayerManager {
     }
 
     public void removeUser(UUID playerId) {
-        usersByUUID.remove(playerId);
+        players.remove(playerId);
     }
 
     public Collection<MenuPlayer> getAllPlayers() {
-        return usersByUUID.values();
+        return players.values();
     }
 
 }

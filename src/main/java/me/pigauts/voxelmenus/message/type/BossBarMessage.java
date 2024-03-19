@@ -3,7 +3,7 @@ package me.pigauts.voxelmenus.message.type;
 import java.util.Arrays;
 import java.util.List;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.message.Message;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.core.runnable.MenusRunnable;
@@ -54,7 +54,7 @@ public class BossBarMessage implements Message {
     }
 
 	@Nullable
-	public static BossBarMessage fromConfig(Config config) {
+	public static BossBarMessage fromConfig(ConfigSection config) {
 		if (config == null) return null;
 		return new BossBarMessage(
 				config.getNotNull(config::getColorString, "title"),

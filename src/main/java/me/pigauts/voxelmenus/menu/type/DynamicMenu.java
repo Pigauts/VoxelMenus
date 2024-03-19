@@ -3,7 +3,7 @@ package me.pigauts.voxelmenus.menu.type;
 import me.pigauts.voxelmenus.API.MenuType;
 import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.core.builder.DynamicMenuBuilder;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.menu.MenuSettings;
 import me.pigauts.voxelmenus.menu.view.DynamicMenuView;
 import me.pigauts.voxelmenus.API.menu.MenuView;
@@ -27,7 +27,7 @@ public class DynamicMenu extends SimpleMenu {
         return MenuType.DYNAMIC;
     }
 
-    public static DynamicMenu fromConfig(Config config) {
+    public static DynamicMenu fromConfig(ConfigSection config) {
         if (config == null) return null;
         return new DynamicMenuBuilder(config).build();
     }

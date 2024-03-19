@@ -1,7 +1,9 @@
 package me.pigauts.voxelmenus.core.builder;
 
+import me.pigauts.voxelmenus.API.MenuAction;
+import me.pigauts.voxelmenus.core.factory.Factories;
 import me.pigauts.voxelmenus.menu.MenuMeta;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.function.condition.Condition;
 import me.pigauts.voxelmenus.core.function.condition.ConditionSet;
 import me.pigauts.voxelmenus.menu.type.DynamicMenu;
@@ -21,16 +23,18 @@ public class DynamicMenuBuilder extends MenuBuilder<DynamicMenu> {
         super(name);
     }
 
-    public DynamicMenuBuilder(@NotNull Config config) {
+    public DynamicMenuBuilder(@NotNull ConfigSection config) {
         super(config);
 
         for (String key : config.getKeys("instances", false)) {
-
-            String title = config.getNotNull(config::getColorString, "instances", key, "title");
+            String title = config.getNotNull(config::getString, "instances", key, "title");
             Button[] buttons = config.getAtKey(MenuLayout::fromConfig, "instances", key, "layout").apply(this);
-            MenuFunctions functions = config.getAtSection(MenuFunctions::fromConfig, "instances", key);
+            MenuMeta meta = new MenuMeta(title, buttons);
 
-            MenuMeta meta = new MenuMetaImpl(title, buttons, functions);
+            meta.addFunction(MenuAction.OPEN, config.getAtSection(Factories::createFunction, "instances", key, "on-open"));
+            meta.addFunction(MenuAction.CLOSE, config.getAtSection(Factories::createFunction, "instances", key, "on-close"));
+            meta.addFunction(MenuAction.UPDATE, config.getAtSection(Factories::createFunction, "instances", key, "on-update"));
+            meta.addFunction(MenuAction.BACKTRACK, config.getAtSection(Factories::createFunction, "instances", key, "on-backtrack"));
 
             if (key.equalsIgnoreCase("default")) {
                 conditionalMetas.put("default", new Conditional<>(Condition.DEFAULT, meta));

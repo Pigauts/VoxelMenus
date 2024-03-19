@@ -1,4 +1,4 @@
-package me.pigauts.voxelmenus.util;
+package me.pigauts.voxelmenus.core.collection;
 
 import java.util.Map;
 

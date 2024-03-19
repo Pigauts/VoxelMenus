@@ -4,7 +4,7 @@ import me.pigauts.voxelmenus.API.factory.MenuFactory;
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.MenuMeta;
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -29,7 +29,7 @@ public abstract class Menus {
     }
 
     @Nullable
-    public static Menu createMenu(@NotNull Config config) {
+    public static Menu createMenu(@NotNull ConfigSection config) {
         return Factories.createMenu(config);
     }
 

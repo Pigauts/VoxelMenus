@@ -23,14 +23,14 @@ public interface MenuView<M extends Menu, P extends MenuPlayer> {
      * @return The previous MenuView, or {@code null} if there is no previous view.
      */
     @Nullable
-    MenuView getPrevious();
+    MenuView getPreviousView();
 
     /**
      * Sets the previous MenuView in the sequence.
      *
      * @param previousView The MenuView to set as the previous view.
      */
-    void setPrevious(MenuView previousView);
+    void setPreviousView(MenuView previousView);
 
     /**
      * Gets the menu associated with this view.
@@ -84,7 +84,12 @@ public interface MenuView<M extends Menu, P extends MenuPlayer> {
     void refresh();
 
     /**
-     * Handles a menu click
+     * Opens the previous menu view if existent.
+     */
+    void back();
+
+    /**
+     * Handler for inventory clicks.
      */
     void click(InventoryClickEvent event);
 

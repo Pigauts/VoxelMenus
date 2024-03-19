@@ -9,7 +9,7 @@ public class Backtrack implements Action {
     @Override
     public void execute(MenuPlayer player) {
         if (!player.isViewingMenu()) return;
-        MenuView previousView = player.getOpenView().getPrevious();
+        MenuView previousView = player.getOpenView().getPreviousView();
 
         if (previousView != null) {
             player.openView(previousView);

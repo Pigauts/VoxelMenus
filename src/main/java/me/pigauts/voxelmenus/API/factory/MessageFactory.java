@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.API.factory;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
 import me.pigauts.voxelmenus.message.Message;
 
@@ -8,6 +8,6 @@ import me.pigauts.voxelmenus.message.Message;
 public interface MessageFactory extends ConfigFactory<Message> {
 
     @Override
-    Message create(Config config);
+    Message create(ConfigSection config);
 
 }

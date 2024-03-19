@@ -1,5 +1,6 @@
 package me.pigauts.voxelmenus.menu.type;
 
+import me.pigauts.voxelmenus.API.MenuType;
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.widget.Button;
 import me.pigauts.voxelmenus.menu.view.EntireMenuView;
@@ -15,6 +16,11 @@ public class EntireMenu<M extends Menu> implements Menu {
     public EntireMenu(M topMenu, Button[] contents) {
         this.topMenu = topMenu;
         this.contents = contents;
+    }
+
+    @Override
+    public MenuType getType() {
+        return topMenu.getType();
     }
 
     public String getName() {

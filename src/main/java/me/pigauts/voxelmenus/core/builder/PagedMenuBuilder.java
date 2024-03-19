@@ -1,7 +1,6 @@
 package me.pigauts.voxelmenus.core.builder;
 
-import me.pigauts.voxelmenus.Util;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import me.pigauts.voxelmenus.menu.type.PagedMenu;
 import me.pigauts.voxelmenus.menu.widget.Button;
@@ -18,7 +17,7 @@ public class PagedMenuBuilder extends StaticMenuBuilder {
     private int[] entrySlots;
     private Button template;
 
-    public PagedMenuBuilder(@NotNull Config config) {
+    public PagedMenuBuilder(@NotNull ConfigSection config) {
         super(config);
         entries = Factories.createEntries(config);
 

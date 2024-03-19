@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.API.factory;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.ConfigFactory;
 import me.pigauts.voxelmenus.API.Function;
 
@@ -8,8 +8,8 @@ import me.pigauts.voxelmenus.API.Function;
 public interface FunctionFactory extends ConfigFactory<Function> {
 
     @Override
-    Function create(Config config);
+    Function create(ConfigSection config);
 
-    default boolean matchSyntax(Config config) { return false; }
+    default boolean matchSyntax(ConfigSection config) { return false; }
 
 }

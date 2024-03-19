@@ -5,14 +5,10 @@ import me.pigauts.voxelmenus.API.factory.*;
 import me.pigauts.voxelmenus.animation.Animation;
 import me.pigauts.voxelmenus.command.CommandManager;
 import me.pigauts.voxelmenus.command.menu.MenusCommand;
-import me.pigauts.voxelmenus.core.config.Config;
-import me.pigauts.voxelmenus.core.factory.ConfigFactory;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.FactoryManager;
 import me.pigauts.voxelmenus.animation.AnimationManager;
 import me.pigauts.voxelmenus.core.function.FunctionSet;
-import me.pigauts.voxelmenus.API.Function;
-import me.pigauts.voxelmenus.core.function.action.Action;
-import me.pigauts.voxelmenus.core.function.condition.Condition;
 import me.pigauts.voxelmenus.API.menu.Menu;
 import me.pigauts.voxelmenus.menu.widget.Button;
 import me.pigauts.voxelmenus.message.Message;
@@ -86,7 +82,7 @@ public class VoxelMenusPlugin extends JavaPlugin implements MenusPlugin {
         createFolder("placeholders");
         createFolder("triggers");
 
-        Config config = getConfig("config.yml");
+        ConfigSection config = getConfig("config.yml");
 
         if (config.getBoolean("generate-examples", true)) {
             createFile("menus/ExampleStatic.yml");

@@ -1,11 +1,10 @@
 package me.pigauts.voxelmenus.menu;
 
 import me.pigauts.voxelmenus.API.Function;
+import me.pigauts.voxelmenus.core.collection.IdMap;
+import me.pigauts.voxelmenus.core.collection.IdMapImpl;
 import me.pigauts.voxelmenus.menu.widget.Button;
 import me.pigauts.voxelmenus.menu.widget.Entry;
-import me.pigauts.voxelmenus.util.IdMap;
-
-import java.util.HashMap;
 
 public class MenuMeta {
 
@@ -13,10 +12,10 @@ public class MenuMeta {
 
     private final String title;
     private final Button[] buttons;
-    private final IdMap<Function> functions = new HashMap<String, Function>();
+    private final IdMap<Function> functions;
 
     public MenuMeta(String title, Button[] buttons) {
-        this(title, buttons, new HashMap<String, Function>());
+        this(title, buttons, new IdMapImpl<>());
     }
 
     public MenuMeta(String title, Button[] buttons, IdMap<Function> functions) {
@@ -59,12 +58,16 @@ public class MenuMeta {
         }
     }
 
-    public Function getFunction(String id) {
-        return functions.get(id);
+    public Function getFunction(String functionId) {
+        return functions.get(functionId);
     }
 
-    public void setFunction(String id, Function function) {
-        functions.put(id, function);
+    public void addFunction(String functionId, Function function) {
+        functions.put(functionId, function);
+    }
+
+    public void removeFunction(String functionId) {
+        functions.remove(functionId);
     }
 
     public MenuMeta clone() {

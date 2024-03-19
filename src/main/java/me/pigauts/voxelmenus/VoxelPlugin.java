@@ -1,10 +1,9 @@
 package me.pigauts.voxelmenus;
 
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
@@ -20,8 +19,8 @@ public interface VoxelPlugin extends Plugin {
         Bukkit.getPluginManager().callEvent(event);
     }
 
-    default Config getConfig(String path) {
-        return new Config(getFile(path));
+    default ConfigSection getConfig(String path) {
+        return new ConfigSection(getFile(path));
     }
 
     default void createPluginFolder() {
@@ -64,14 +63,14 @@ public interface VoxelPlugin extends Plugin {
         return fileList;
     }
 
-    default List<Config> getConfigs(String path) {
+    default List<ConfigSection> getConfigs(String path) {
 
-        List<Config> configs = new ArrayList<>();
+        List<ConfigSection> configs = new ArrayList<>();
 
         for (File file : getFiles(path)) {
             if (!file.getName().toLowerCase().endsWith(".yml")) continue;
 
-            configs.add(new Config(file));
+            configs.add(new ConfigSection(file));
         }
 
         return configs;

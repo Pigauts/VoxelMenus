@@ -3,6 +3,7 @@ package me.pigauts.voxelmenus.core.function.action;
 import me.pigauts.voxelmenus.Util;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.core.factory.Factories;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,7 +26,7 @@ public class ActionSet implements Action {
         List<Action> actions = new ArrayList<>();
 
         for (String key : config.getKeys(false)) {
-            Action action = Factories.createAction(config, key);
+            Action action = config.getAtKey(Factories::createAction, key);
             if (action != null) {
                 actions.add(action);
             }

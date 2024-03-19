@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.core.function.action.player;
 
 import me.pigauts.voxelmenus.core.function.action.Action;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.API.MenuPlayer;
 
 public class SetExp implements Action {
@@ -12,7 +12,7 @@ public class SetExp implements Action {
         this.amount = amount;
     }
 
-    public SetExp(Config config) {
+    public SetExp(ConfigSection config) {
         this(config.getInt("SET_EXP"));
     }
 

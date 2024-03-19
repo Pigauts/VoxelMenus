@@ -11,7 +11,6 @@ import me.pigauts.voxelmenus.util.AtlasPos;
 
 public class AtlasMenu extends StaticMenu {
 
-    private AtlasMenuMeta layout;
     private AtlasPos startingPosition;
 
     public AtlasMenu(String name, MenuSettings settings, MenuMeta meta) {

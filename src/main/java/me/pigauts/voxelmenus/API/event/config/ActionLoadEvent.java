@@ -1,23 +1,17 @@
 package me.pigauts.voxelmenus.API.event.config;
 
-import me.pigauts.voxelmenus.core.event.FactoryEvent;
+import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.event.ConfigFactoryEvent;
+import me.pigauts.voxelmenus.core.factory.ConfigFactory;
 import me.pigauts.voxelmenus.core.function.action.Action;
-import me.pigauts.voxelmenus.core.holder.ConfigKeyHolder;
 import org.bukkit.event.HandlerList;
 
-public class ActionLoadEvent extends FactoryEvent<Action> {
+public class ActionLoadEvent extends ConfigFactoryEvent<Action> {
 
     private final static HandlerList HANDLERS = new HandlerList();
 
-    private final ConfigKeyHolder keyHolder;
-
-    public ActionLoadEvent(ConfigKeyHolder keyHolder, Action def) {
-        super(def);
-        this.keyHolder = keyHolder;
-    }
-
-    public ConfigKeyHolder getKeyHolder() {
-        return keyHolder;
+    public ActionLoadEvent(Config config, ConfigFactory<Action> factory) {
+        super(config, factory);
     }
 
     @Override

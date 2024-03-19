@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.item;
 
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.core.config.Config;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -17,7 +17,7 @@ public class ItemManager {
     }
 
     public void load() {
-        for (Config config : plugin.getConfigs("items"))
+        for (ConfigSection config : plugin.getConfigs("items"))
             for (String key : config.getKeys(false))
                 items.put(key, config.getItemStack(key));
     }

@@ -2,14 +2,38 @@ package me.pigauts.voxelmenus.API;
 
 public enum AtlasScroll {
 
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    UP(0, 1),
+    DOWN(0, -1),
+    LEFT(-1, 0),
+    RIGHT(1, 0),
 
-    RIGHT_UP,
-    RIGHT_DOWN,
-    LEFT_UP,
-    LEFT_DOWN;
+    RIGHT_UP(1, 1),
+    RIGHT_DOWN(1, -1),
+    LEFT_UP(-1, 1),
+    LEFT_DOWN(-1, -1);
+
+    private final int x, y;
+
+    AtlasScroll(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX(int amount) {
+        int x1;
+        return x == 0 ? 0 : x < 0 ? x - amount : x + amount;
+    }
+
+    public int getY(int amount) {
+        return y;
+    }
 
 }

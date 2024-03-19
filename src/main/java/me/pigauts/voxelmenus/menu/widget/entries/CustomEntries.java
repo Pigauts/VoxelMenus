@@ -1,7 +1,6 @@
 package me.pigauts.voxelmenus.menu.widget.entries;
 
-import me.pigauts.voxelmenus.core.config.Config;
-import me.pigauts.voxelmenus.menu.widget.Button;
+import me.pigauts.voxelmenus.core.config.ConfigSection;
 import me.pigauts.voxelmenus.menu.widget.Entry;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,11 +16,11 @@ public class CustomEntries implements MenuEntries {
         this.entries = entries;
     }
 
-    public static MenuEntries fromConfig(Config config) {
+    public static MenuEntries fromConfig(ConfigSection config) {
         if (config == null) return null;
 
         List<Entry> entries = new ArrayList<>();
-        for (Config section : config.getSections("entries")) {
+        for (ConfigSection section : config.getSections("entries")) {
             Entry entry = Entry.fromConfig(section);
             if (entry != null) {
                 entries.add(entry);
