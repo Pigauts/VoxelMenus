@@ -15,4 +15,6 @@ public class VoxelMenusAPI {
         VoxelMenusAPI.plugin = plugin;
     }
 
+    public static boolean debug() { return true; }
+
 }

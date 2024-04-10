@@ -1,5 +1,7 @@
 package me.pigauts.voxelmenus.item;
 
+import me.pigauts.voxelmenus.api.config.Config;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
@@ -29,19 +31,19 @@ public class ItemBuilder {
         this.amount = amount;
     }
 
-//    public ItemBuilder(Config config) {
-//        this.type = config.getMaterial("material", Material.DIRT);
-//        this.amount = config.getInt("amount", 1);
-//
-//        if (config.isSet("name")) this.name = config.getString("name");
-//        if (config.isSet("lore")) {
-//            this.lore = config.getStringList("lore");
-//            this.lore.replaceAll(string -> ChatColor.translateAlternateColorCodes('&', string));
-//        }
-//        this.enchanted = config.getBoolean("enchanted", false);
-//        this.modelData = config.getInt("model-data", -1);
-//
-//    }
+    public ItemBuilder(Config config) {
+        this.type = config.getMaterial("material", Material.DIRT);
+        this.amount = config.getInt("amount", 1);
+
+        if (config.isSet("name")) this.name = config.getString("name");
+        if (config.isSet("lore")) {
+            this.lore = config.getStringList("lore");
+            this.lore.replaceAll(string -> ChatColor.translateAlternateColorCodes('&', string));
+        }
+        this.enchanted = config.getBoolean("enchanted", false);
+        this.modelData = config.getInt("model-data", -1);
+
+    }
 
     public static ItemStack createPlayerHead(OfflinePlayer player) {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
