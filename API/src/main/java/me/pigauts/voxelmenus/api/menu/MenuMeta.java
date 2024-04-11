@@ -1,24 +1,24 @@
 package me.pigauts.voxelmenus.api.menu;
 
-import me.pigauts.voxelmenus.API.Function;
 import me.pigauts.voxelmenus.api.core.collection.IdMap;
 import me.pigauts.voxelmenus.api.core.collection.IdMapImpl;
-import me.pigauts.voxelmenus.menu.widget.Button;
-import me.pigauts.voxelmenus.menu.widget.Entry;
+import me.pigauts.voxelmenus.api.function.Function;
+import me.pigauts.voxelmenus.api.menu.button.SimpleTemplateButton;
+import me.pigauts.voxelmenus.api.menu.button.TemplateButton;
 
 public class MenuMeta {
 
-    public static final MenuMeta EMPTY_META = new MenuMeta("", new Button[0]);
+    public static final MenuMeta EMPTY_META = new MenuMeta("", new SimpleTemplateButton[0]);
 
     private String title;
-    private final Button[] buttons;
+    private final TemplateButton[] buttons;
     private final IdMap<Function> functions;
 
-    public MenuMeta(String title, Button[] buttons) {
+    public MenuMeta(String title, TemplateButton[] buttons) {
         this(title, buttons, new IdMapImpl<>());
     }
 
-    public MenuMeta(String title, Button[] buttons, IdMap<Function> functions) {
+    public MenuMeta(String title, TemplateButton[] buttons, IdMap<Function> functions) {
         this.title = title;
         this.buttons = buttons;
         this.functions = functions;
@@ -32,33 +32,24 @@ public class MenuMeta {
         this.title = title;
     }
 
-    public Button[] getButtons() {
+    public TemplateButton[] getButtons() {
         return buttons;
     }
 
-    public Button getButton(int index) {
+    public TemplateButton getButton(int index) {
         if (index < 0 || index > buttons.length) return null;
         return buttons[index];
     }
 
-    public void setButton(int slot, Button button) {
+    public void setButton(int slot, TemplateButton button) {
         if (slot < 0 || slot > buttons.length) return;
         buttons[slot] = button;
     }
 
-    public void setButton(Button button, int... slots) {
+    public void setButton(TemplateButton button, int... slots) {
         for (int slot : slots) {
             setButton(slot, button);
         }
-    }
-
-    public void setEntry(int index, Entry entry) {
-        Button button = getButton(index);
-        if (button == null) {
-            setButton(index, entry);
-            return;
-        }
-        entry.apply(button);
     }
 
     public void clearButtons(int... slots) {

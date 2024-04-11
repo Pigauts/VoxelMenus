@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.api.menu.view;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.menu.Menu;
-import me.pigauts.voxelmenus.menu.widget.entries.MenuEntries;
+import me.pigauts.voxelmenus.api.menu.Menu;
+import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
+import me.pigauts.voxelmenus.api.player.MenuPlayer;
 
 public interface PagedView<M extends Menu, P extends MenuPlayer> extends MetaView<M, P> {
 
@@ -12,7 +12,7 @@ public interface PagedView<M extends Menu, P extends MenuPlayer> extends MetaVie
 
     boolean isLastPage();
 
-    MenuEntries getEntries();
+    MenuEntryButtons getEntries();
 
     int getCurrentPage();
 

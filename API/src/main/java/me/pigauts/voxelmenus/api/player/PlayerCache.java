@@ -2,7 +2,7 @@ package me.pigauts.voxelmenus.api.player;
 
 import me.pigauts.voxelmenus.api.core.collection.IdMap;
 import me.pigauts.voxelmenus.api.core.collection.IdMapImpl;
-import me.pigauts.voxelmenus.api.menu.MenuEntries;
+import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
 import me.pigauts.voxelmenus.api.menu.MenuMeta;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import org.bukkit.inventory.Inventory;
@@ -16,7 +16,7 @@ public class PlayerCache {
     private final IdMap<String> placeholdersCache = new IdMapImpl<>();
     private final IdMap<MenuView> viewsCache = new IdMapImpl<>();
     private final IdMap<MenuMeta> persistentMetaCache = new IdMapImpl<>();
-    private final IdMap<MenuEntries> persistentEntriesCache = new IdMapImpl<>();
+    private final IdMap<MenuEntryButtons> persistentEntriesCache = new IdMapImpl<>();
 
     public void cachePlayerInventory(ItemStack[] playerInventory) {
         this.playerInventory = playerInventory.clone();
@@ -78,7 +78,7 @@ public class PlayerCache {
         viewsCache.remove(name);
     }
 
-    public MenuEntries getCachedEntries(String entriesId) {
+    public MenuEntryButtons getCachedEntries(String entriesId) {
         return persistentEntriesCache.get(entriesId);
     }
 }

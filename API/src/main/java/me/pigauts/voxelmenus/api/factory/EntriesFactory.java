@@ -1,12 +1,12 @@
 package me.pigauts.voxelmenus.api.factory;
 
 import me.pigauts.voxelmenus.api.config.Config;
-import me.pigauts.voxelmenus.api.menu.MenuEntries;
+import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
 
 @FunctionalInterface
-public interface EntriesFactory extends ConfigFactory<MenuEntries> {
+public interface EntriesFactory extends ConfigFactory<MenuEntryButtons> {
 
     @Override
-    MenuEntries create(Config config);
+    MenuEntryButtons create(Config config);
 
 }

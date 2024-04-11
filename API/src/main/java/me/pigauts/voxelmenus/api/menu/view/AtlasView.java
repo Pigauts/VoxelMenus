@@ -1,9 +1,9 @@
 package me.pigauts.voxelmenus.api.menu.view;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.ScrollDirection;
-import me.pigauts.voxelmenus.API.menu.Menu;
-import me.pigauts.voxelmenus.util.atlas.AtlasPos;
+import me.pigauts.voxelmenus.api.core.enums.ScrollDirection;
+import me.pigauts.voxelmenus.api.menu.Menu;
+import me.pigauts.voxelmenus.api.menu.atlas.AtlasPos;
+import me.pigauts.voxelmenus.api.player.MenuPlayer;
 
 public interface AtlasView<M extends Menu, P extends MenuPlayer> extends MetaView<M, P> {
 
