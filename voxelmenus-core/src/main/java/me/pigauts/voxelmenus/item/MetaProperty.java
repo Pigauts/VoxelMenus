@@ -1,5 +1,6 @@
 package me.pigauts.voxelmenus.item;
 
+import me.pigauts.voxelmenus.api.item.ItemProperty;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

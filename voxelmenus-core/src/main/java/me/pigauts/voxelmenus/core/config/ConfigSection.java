@@ -1,4 +1,4 @@
-package me.pigauts.voxelmenus.config;
+package me.pigauts.voxelmenus.core.config;
 
 import me.pigauts.voxelmenus.util.Deserialize;
 import me.pigauts.voxelmenus.util.Pair;

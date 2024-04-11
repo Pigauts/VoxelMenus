@@ -1,6 +1,6 @@
 package me.pigauts.voxelmenus.item.property;
 
-import me.pigauts.voxelmenus.item.ItemProperty;
+import me.pigauts.voxelmenus.api.item.ItemProperty;
 import org.bukkit.inventory.ItemStack;
 
 public class AmountProperty implements ItemProperty {

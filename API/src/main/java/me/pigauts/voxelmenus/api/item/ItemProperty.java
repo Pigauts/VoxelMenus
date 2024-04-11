@@ -1,4 +1,4 @@
-package me.pigauts.voxelmenus.item;
+package me.pigauts.voxelmenus.api.item;
 
 import org.bukkit.inventory.ItemStack;
 

@@ -1,4 +1,4 @@
-package me.pigauts.voxelmenus.config;
+package me.pigauts.voxelmenus.core.config;
 
 import me.pigauts.voxelmenus.api.config.ValueHolder;
 import org.apache.commons.lang.Validate;
