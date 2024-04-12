@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>voxelmenus-core</module>
-        <module>API</module>
+        <module>voxelmenus-api</module>
     </modules>
 
     <properties>

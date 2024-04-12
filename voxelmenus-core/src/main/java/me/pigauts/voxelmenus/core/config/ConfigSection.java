@@ -3,7 +3,7 @@ package me.pigauts.voxelmenus.core.config;
 import me.pigauts.voxelmenus.util.Deserialize;
 import me.pigauts.voxelmenus.util.Pair;
 import me.pigauts.voxelmenus.util.Path;
-import me.pigauts.voxelmenus.util.Util;
+import me.pigauts.voxelmenus.util.Utils;
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
 import me.pigauts.voxelmenus.api.config.Config;
 import me.pigauts.voxelmenus.api.config.ConfigurationException;
@@ -124,7 +124,7 @@ public class ConfigSection implements Config {
 
     @Override
     public UUID getUUID(String path) {
-        return Util.getUUID(getString(path));
+        return Utils.getUUID(getString(path));
     }
 
     @Override
@@ -303,12 +303,12 @@ public class ConfigSection implements Config {
 
     @Override
     public <E extends Enum<E>> E getEnum(String path, Class<E> enumClass) {
-        return Util.getEnum(enumClass, getString(path));
+        return Utils.getEnum(enumClass, getString(path));
     }
 
     @Override
     public <E extends Enum<E>> E getEnum(String path, Class<E> enumClass, E def) {
-        E value = Util.getEnum(enumClass, getString(path));
+        E value = Utils.getEnum(enumClass, getString(path));
         return value == null ? def : value;
     }
 
@@ -364,7 +364,7 @@ public class ConfigSection implements Config {
         Set<String> paths = new HashSet<>();
 
         for (String key : getKeys(path, deep)) {
-            paths.add(Util.buildPath(section.getCurrentPath(), path, key));
+            paths.add(Utils.buildPath(section.getCurrentPath(), path, key));
         }
 
         return paths;
@@ -375,7 +375,7 @@ public class ConfigSection implements Config {
         List<E> enumList = new ArrayList<>();
 
         for (String enumName : getStringList(path)) {
-            E enumValue = Util.getEnum(enumClass, enumName);
+            E enumValue = Utils.getEnum(enumClass, enumName);
             if (enumValue == null) continue;
 
             enumList.add(enumValue);

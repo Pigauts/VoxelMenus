@@ -4,7 +4,7 @@ import me.pigauts.voxelmenus.api.event.menu.MenuUpdateEvent;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
 import me.pigauts.voxelmenus.core.runnable.MenusRunnable;
-import me.pigauts.voxelmenus.util.Util;
+import me.pigauts.voxelmenus.util.Utils;
 
 
 public class MenuUpdateTask extends MenusRunnable {
@@ -14,7 +14,7 @@ public class MenuUpdateTask extends MenusRunnable {
 
     private MenuUpdateTask(MenuView view) {
         this.view = view;
-        this.player = view.getPlayer();
+        this.player = view.getViewer();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class MenuUpdateTask extends MenusRunnable {
         }
 
         MenuUpdateEvent event = new MenuUpdateEvent(view);
-        Util.callEvent(event);
+        Utils.callEvent(event);
         view.getMenu().onUpdate(event);
 
         if (event.isCancelled()) return;

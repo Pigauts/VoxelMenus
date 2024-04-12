@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.item.property;
 
 import me.pigauts.voxelmenus.item.MetaProperty;
-import me.pigauts.voxelmenus.util.Util;
+import me.pigauts.voxelmenus.util.Utils;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,7 +12,7 @@ public class FlagsProperty implements MetaProperty {
     private final ItemFlag[] flags;
 
     public FlagsProperty(Collection<ItemFlag> flags) {
-        this.flags = Util.toNotNullArray(flags, new ItemFlag[0]);
+        this.flags = Utils.toNotNullArray(flags, new ItemFlag[0]);
     }
 
     @Override

@@ -13,7 +13,7 @@ import me.pigauts.voxelmenus.api.player.MenuPlayer;
 import me.pigauts.voxelmenus.api.player.PlayerCache;
 import me.pigauts.voxelmenus.item.ItemBuilder;
 import me.pigauts.voxelmenus.menu.MenuUpdateTask;
-import me.pigauts.voxelmenus.util.Util;
+import me.pigauts.voxelmenus.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -158,7 +158,7 @@ public class VoxelMenuPlayer implements MenuPlayer {
         MenuView view = menu.createView(this);
 
         MenuOpenEvent event = new MenuOpenEvent(view);
-        Util.callEvent(event);
+        Utils.callEvent(event);
         menu.onOpen(event);
 
         if (event.isCancelled()) return;
@@ -172,7 +172,7 @@ public class VoxelMenuPlayer implements MenuPlayer {
         if (!isViewingMenu()) return;
 
         MenuCloseEvent event = new MenuCloseEvent(openView);
-        Util.callEvent(event);
+        Utils.callEvent(event);
         openView.getMenu().onClose(event);
 
         if (event.isCancelled()) return;
@@ -185,7 +185,7 @@ public class VoxelMenuPlayer implements MenuPlayer {
         if (!isViewingMenu()) return;
 
         MenuClickEvent event = new MenuClickEvent(openView, clickEvent);
-        Util.callEvent(event);
+        Utils.callEvent(event);
         openView.getMenu().onClick(event);
 
         if (event.isCancelled()) return;
@@ -292,7 +292,7 @@ public class VoxelMenuPlayer implements MenuPlayer {
     @Override
     public void giveItem(ItemStack... items) {
         Player player = asPlayer();
-        for (Map.Entry<Integer, ItemStack> entry : player.getInventory().addItem(Util.toNotNullArray(items)).entrySet()) {
+        for (Map.Entry<Integer, ItemStack> entry : player.getInventory().addItem(Utils.toNotNullArray(items)).entrySet()) {
             player.getWorld().dropItemNaturally(player.getLocation(), entry.getValue());
         }
     }
