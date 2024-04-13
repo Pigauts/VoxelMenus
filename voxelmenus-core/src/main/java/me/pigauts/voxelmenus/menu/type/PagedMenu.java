@@ -38,7 +38,7 @@ public class PagedMenu extends StaticMenu {
     }
 
     public InventoryMeta getMenuMeta(int page) {
-        InventoryMeta pageMeta = meta.clone();
+        InventoryMeta pageMeta = getInventoryMeta();
         pageMeta.setTitle(pageMeta.getTitle().replaceAll("%page%", String.valueOf(page)));
         return pageMeta;
     }

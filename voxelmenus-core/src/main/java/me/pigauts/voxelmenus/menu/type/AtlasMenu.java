@@ -1,13 +1,13 @@
 package me.pigauts.voxelmenus.menu.type;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.MenuType;
+import me.pigauts.voxelmenus.api.core.enums.MenuType;
 import me.pigauts.voxelmenus.api.menu.InventoryMeta;
+import me.pigauts.voxelmenus.api.menu.atlas.Atlas;
+import me.pigauts.voxelmenus.api.menu.atlas.InventoryWindow;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
+import me.pigauts.voxelmenus.api.player.MenuPlayer;
 import me.pigauts.voxelmenus.menu.AtlasSettings;
 import me.pigauts.voxelmenus.menu.view.AtlasMenuView;
-import me.pigauts.voxelmenus.util.atlas.Atlas;
-import me.pigauts.voxelmenus.util.atlas.InventoryWindow;
 
 public class AtlasMenu extends StaticMenu {
 

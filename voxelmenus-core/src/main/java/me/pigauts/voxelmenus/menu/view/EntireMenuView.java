@@ -2,6 +2,7 @@ package me.pigauts.voxelmenus.menu.view;
 
 import me.pigauts.voxelmenus.api.animation.Animation;
 import me.pigauts.voxelmenus.api.menu.Menu;
+import me.pigauts.voxelmenus.api.menu.button.ViewButton;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
 import me.pigauts.voxelmenus.menu.type.EntireMenu;
@@ -50,6 +51,16 @@ public class EntireMenuView implements MenuView {
     }
 
     @Override
+    public ViewButton[] getButtons() {
+        return topView.getButtons();
+    }
+
+    @Override
+    public boolean isClosed() {
+        return topView.isClosed();
+    }
+
+    @Override
     public List<Animation> getPlayingAnimations() {
         return topView.getPlayingAnimations();
     }
@@ -67,11 +78,6 @@ public class EntireMenuView implements MenuView {
     public void close() {
         topView.close();
         player.restoreInventory();
-    }
-
-    @Override
-    public void update() {
-        topView.update();
     }
 
     @Override

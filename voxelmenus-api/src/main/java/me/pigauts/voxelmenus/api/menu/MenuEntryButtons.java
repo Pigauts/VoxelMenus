@@ -3,6 +3,7 @@ package me.pigauts.voxelmenus.api.menu;
 import me.pigauts.voxelmenus.api.menu.button.TemplateEntryButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MenuEntryButtons extends ArrayList<TemplateEntryButton> {
 
@@ -16,6 +17,10 @@ public abstract class MenuEntryButtons extends ArrayList<TemplateEntryButton> {
 
     public boolean isPersistent() {
         return persistent;
+    }
+
+    public List<TemplateEntryButton> get(int startIndex, int endIndex) {
+        return subList(startIndex, endIndex);
     }
 
 }

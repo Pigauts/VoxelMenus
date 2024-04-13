@@ -6,7 +6,6 @@ import me.pigauts.voxelmenus.api.menu.button.TemplateButton;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
 import me.pigauts.voxelmenus.menu.view.EntireMenuView;
-import org.bukkit.event.inventory.InventoryType;
 
 public class EntireMenu<M extends Menu> implements Menu {
 
@@ -27,14 +26,6 @@ public class EntireMenu<M extends Menu> implements Menu {
         return topMenu.getName();
     }
 
-    public InventoryType getStorage() {
-        return topMenu.getStorage();
-    }
-
-    public int getSize() {
-        return topMenu.getSize();
-    }
-
     public int getRefresh() {
         return topMenu.getRefresh();
     }
@@ -53,10 +44,6 @@ public class EntireMenu<M extends Menu> implements Menu {
 
     public M getTopMenu() {
         return topMenu;
-    }
-
-    public Button[] getBottomContents() {
-        return contents;
     }
 
     @Override

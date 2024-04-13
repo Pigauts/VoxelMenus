@@ -30,14 +30,14 @@ public class AtlasMenuView<T extends AtlasMenu, P extends MenuPlayer> extends Me
     public void setWindowPosition(AtlasPos position) {
         window.setPosition(position);
         update();
-        viewer.runFunction(meta.getFunction(MenuFunction.ATLAS_SCROLL));
+        viewer.runFunction(getInventoryMeta().getFunction(MenuFunction.ATLAS_SCROLL));
     }
 
     @Override
     public void scroll(int x, int y) {
         window.translate(x, y);
         update();
-        viewer.runFunction(meta.getFunction(MenuFunction.ATLAS_SCROLL));
+        viewer.runFunction(getInventoryMeta().getFunction(MenuFunction.ATLAS_SCROLL));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.pigauts.voxelmenus.menu.view;
 
 import me.pigauts.voxelmenus.api.core.enums.MenuFunction;
+import me.pigauts.voxelmenus.api.menu.InventoryMeta;
 import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
 import me.pigauts.voxelmenus.api.menu.view.PagedView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
@@ -24,15 +25,15 @@ public class PagedMenuView<M extends PagedMenu, P extends MenuPlayer> extends Me
 
     @Override
     public void update() {
-        meta = menu.getMenuMeta().clone();
+        InventoryMeta inventoryMeta = menu.getInventoryMeta();
 
-        meta.setTitle(meta.getTitle().replaceAll("%page%", String.valueOf(currentPage + 1)));
+        inventoryMeta.setTitle(inventoryMeta.getTitle().replaceAll("%page%", String.valueOf(currentPage + 1)));
 
         int startIndex = (currentPage - 1) * menu.getEntrySlotSize();
         int endIndex = Math.min(currentPage * menu.getEntrySlotSize(), entries.size());
 
         for (int i = startIndex, j = 0; i < endIndex; i++, j++) {
-//            meta.setEntry(menu.getEntrySlots()[j], entries.get(i));
+            inventoryMeta.setButton(entries.get(i), j);
         }
 
         super.update();
@@ -75,14 +76,14 @@ public class PagedMenuView<M extends PagedMenu, P extends MenuPlayer> extends Me
     @Override
     public void nextPage() {
         if (setCurrentPage(currentPage + 1)) {
-            viewer.runFunction(meta.getFunction(MenuFunction.PAGE_TURN));
+            viewer.runFunction(getInventoryMeta().getFunction(MenuFunction.PAGE_TURN));
         }
     }
 
     @Override
     public void previousPage() {
         if (setCurrentPage(currentPage - 1)) {
-            viewer.runFunction(meta.getFunction(MenuFunction.PAGE_TURN));
+            viewer.runFunction(getInventoryMeta().getFunction(MenuFunction.PAGE_TURN));
         }
     }
 

@@ -7,7 +7,6 @@ import me.pigauts.voxelmenus.api.event.menu.MenuOpenEvent;
 import me.pigauts.voxelmenus.api.event.menu.MenuUpdateEvent;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
-import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 
 public interface Menu {
@@ -27,21 +26,6 @@ public interface Menu {
      */
     @NotNull
     String getName();
-
-    /**
-     * Gets the storage type of the menu.
-     *
-     * @return The storage type of the menu.
-     */
-    @NotNull
-    InventoryType getStorage();
-
-    /**
-     * Gets the size of the menu.
-     *
-     * @return The size of the menu.
-     */
-    int getSize();
 
     /**
      * Gets the refresh rate of the menu.

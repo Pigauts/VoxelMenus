@@ -80,12 +80,7 @@ public interface MenuView<M extends Menu, P extends MenuPlayer> {
     void close();
 
     /**
-     * Updates the menu view.
-     */
-    void update();
-
-    /**
-     * Refreshes the inventory
+     * Updates the inventory contents
      */
     void refresh();
 

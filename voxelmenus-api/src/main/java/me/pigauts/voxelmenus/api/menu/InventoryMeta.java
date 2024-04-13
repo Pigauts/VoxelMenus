@@ -63,7 +63,7 @@ public class InventoryMeta {
     }
 
     public void setSize(int size) {
-        if (InventoryUtils.isValidChestInventory(storage, size) || size == storage.getDefaultSize()) {
+        if (InventoryUtils.isValidInventory(storage, size)) {
             this.size = size;
             this.templateButtons = Arrays.copyOf(templateButtons, size);
         }

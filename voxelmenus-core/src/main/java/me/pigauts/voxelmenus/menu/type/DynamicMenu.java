@@ -26,7 +26,7 @@ public class DynamicMenu extends SimpleMenu {
     }
 
     @NotNull
-    public InventoryMeta getMenuMeta(MenuPlayer player) {
+    public InventoryMeta getInventoryMeta(MenuPlayer player) {
         for (Conditional<InventoryMeta> conditional : conditionalMetas.values()) {
             if (!conditional.isMet(player)) continue;
             return conditional.getResult();
@@ -35,7 +35,7 @@ public class DynamicMenu extends SimpleMenu {
     }
 
     @NotNull
-    public InventoryMeta getMenuMeta(String name) {
+    public InventoryMeta getInventoryMeta(String name) {
         return conditionalMetas.containsKey(name) ? conditionalMetas.get(name).getResult() : getDefaultMeta();
     }
 
@@ -50,7 +50,7 @@ public class DynamicMenu extends SimpleMenu {
     }
 
     public MenuView createView(MenuPlayer player, String name) {
-        return new DynamicMenuView(this, player, getMenuMeta(name));
+        return new DynamicMenuView(this, player, getInventoryMeta(name));
     }
 
 }

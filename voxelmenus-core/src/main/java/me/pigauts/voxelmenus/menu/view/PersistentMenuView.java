@@ -9,7 +9,7 @@ public class PersistentMenuView extends SimpleView {
 
 
     public PersistentMenuView(@NotNull Menu menu, @NotNull MenuPlayer player) {
-        super(menu, player);
+        super(menu, player, null);
     }
 
     public PersistentMenuView(@NotNull Menu menu, @NotNull MenuPlayer player, @NotNull Inventory inventory) {

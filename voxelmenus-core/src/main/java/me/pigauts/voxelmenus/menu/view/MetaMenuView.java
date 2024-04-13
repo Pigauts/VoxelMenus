@@ -11,51 +11,48 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class MetaMenuView<M extends Menu, P extends MenuPlayer> extends SimpleView<M, P> implements MetaView<M, P> {
 
-    private InventoryMeta meta;
+    private InventoryMeta inventoryMeta;
 
     public MetaMenuView(@NotNull M menu, @NotNull P player) {
         this(menu, player, InventoryMeta.EMPTY_META);
     }
 
-    public MetaMenuView(@NotNull M menu, @NotNull P player, @NotNull InventoryMeta meta) {
-        super(menu, player, InventoryUtils.createInventory(menu, meta));
-        this.meta = meta;
+    public MetaMenuView(@NotNull M menu, @NotNull P player, @NotNull InventoryMeta inventoryMeta) {
+        super(menu, player, InventoryUtils.createInventory(inventoryMeta.getTitle(), inventoryMeta.getStorage(), inventoryMeta.getSize()));
+        this.inventoryMeta = inventoryMeta;
     }
 
     @Override
     public void open() {
         super.open();
-        viewer.runFunction(meta.getFunction(MenuFunction.OPEN));
+        viewer.runFunction(inventoryMeta.getFunction(MenuFunction.OPEN));
     }
 
     @Override
     public void close() {
         super.close();
-        viewer.runFunction(meta.getFunction(MenuFunction.CLOSE));
+        viewer.runFunction(inventoryMeta.getFunction(MenuFunction.CLOSE));
     }
 
-    @Override
     public void update() {
-        for (int i = 0; i < menu.getSize(); i++) {
-            TemplateButton templateButton = meta.getTemplateButton(i);
+        for (int i = 0; i < inventoryMeta.getSize(); i++) {
+            TemplateButton templateButton = inventoryMeta.getTemplateButton(i);
             viewButtons[i] = templateButton != null ? templateButton.createViewButton(this) : null;
         }
-        super.update();
+        refresh();
 
-        if (!isClosed()) {
-            viewer.runFunction(meta.getFunction(MenuFunction.UPDATE));
-        }
+        viewer.runFunction(inventoryMeta.getFunction(MenuFunction.UPDATE));
     }
 
     @Override
-    public InventoryMeta getMenuMeta() {
-        return meta;
+    public InventoryMeta getInventoryMeta() {
+        return inventoryMeta;
     }
 
     @Override
-    public void setMenuMeta(@NotNull InventoryMeta meta) {
-        if (meta == null) return;
-        this.meta = meta;
+    public void setInventoryMeta(@NotNull InventoryMeta inventoryMeta) {
+        if (inventoryMeta == null) return;
+        this.inventoryMeta = inventoryMeta;
     }
 
 }

@@ -9,11 +9,11 @@ import me.pigauts.voxelmenus.menu.view.StaticMenuView;
 
 public class StaticMenu extends SimpleMenu {
 
-    protected final InventoryMeta meta;
+    protected final InventoryMeta inventoryMeta;
 
     public StaticMenu(String name, MenuSettings settings, InventoryMeta meta) {
         super(name, settings);
-        this.meta = meta;
+        this.inventoryMeta = meta;
     }
 
     @Override
@@ -21,8 +21,8 @@ public class StaticMenu extends SimpleMenu {
         return MenuType.STATIC;
     }
 
-    public InventoryMeta getMenuMeta() {
-        return meta;
+    public InventoryMeta getInventoryMeta() {
+        return inventoryMeta.clone();
     }
 
     @Override

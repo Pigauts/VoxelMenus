@@ -6,11 +6,9 @@ import me.pigauts.voxelmenus.api.menu.button.SimpleViewButton;
 import me.pigauts.voxelmenus.api.menu.button.ViewButton;
 import me.pigauts.voxelmenus.api.menu.view.MenuView;
 import me.pigauts.voxelmenus.api.player.MenuPlayer;
-import me.pigauts.voxelmenus.api.core.InventoryUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -27,18 +25,20 @@ public class SimpleView<M extends Menu, P extends MenuPlayer> implements MenuVie
 
     private boolean closed = true;
 
-    public SimpleView(@NotNull M menu, @NotNull P player) {
-        this(menu, player, InventoryUtils.createInventory(menu));
+    public SimpleView(@NotNull M menu, @NotNull P viewer, @NotNull Inventory inventory) {
+        this(menu, viewer, inventory, new SimpleViewButton[inventory.getSize()]);
     }
 
-    public SimpleView(@NotNull M menu, @NotNull P viewer, @NotNull Inventory inventory) {
+    public SimpleView(@NotNull M menu, @NotNull P viewer, @NotNull Inventory inventory, @NotNull ViewButton[] viewButtons) {
         Validate.notNull(menu, "Menu cannot be null");
         Validate.notNull(viewer, "Viewer cannot be null");
         Validate.notNull(inventory, "Inventory cannot be null");
+        Validate.notNull(viewButtons, "Buttons cannot be null");
+        Validate.isTrue(viewButtons.length == inventory.getSize(), "Buttons length must match the inventory's");
         this.menu = menu;
         this.viewer = viewer;
         this.inventory = inventory;
-        this.viewButtons = new SimpleViewButton[menu.getSize()];
+        this.viewButtons = viewButtons;
     }
 
     @Override
@@ -83,35 +83,32 @@ public class SimpleView<M extends Menu, P extends MenuPlayer> implements MenuVie
 
     @Override
     public void open() {
+        refresh();
         viewer.setOpenView(this);
         viewer.openInventory(inventory);
-        update();
         closed = false;
     }
 
     @Override
     public void close() {
+        if (menu.keepOpen() && closed) {
+            viewer.setOpenView(null);
+            viewer.closeInventory();
+            return;
+        }
+
         closed = true;
         viewer.closeInventory();
         viewer.setOpenView(null);
     }
 
     @Override
-    public void update() {
-        ItemStack[] contents = new ItemStack[menu.getSize()];
-
-        for (int i = 0; i < menu.getSize(); i++) {
-            ViewButton viewButton = viewButtons[i];
-            contents[i] = viewButton != null ? viewButton.createViewItem() : null;
-        }
-
-        inventory.setContents(contents);
-        viewer.updateInventory();
-    }
-
-    @Override
     public void refresh() {
-
+        for (int i = 0; i < inventory.getSize(); i++) {
+            ViewButton viewButton = viewButtons[i];
+            inventory.setItem(i, viewButton != null ? viewButton.createViewItem() : null);
+        }
+        viewer.updateInventory();
     }
 
     @Override
@@ -128,7 +125,7 @@ public class SimpleView<M extends Menu, P extends MenuPlayer> implements MenuVie
             return;
         }
 
-        if (slot < menu.getSize()) {
+        if (slot < inventory.getSize()) {
             ViewButton button = viewButtons[slot];
 
             if (button != null) {
