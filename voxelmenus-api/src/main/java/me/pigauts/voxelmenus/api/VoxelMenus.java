@@ -2,6 +2,7 @@ package me.pigauts.voxelmenus.api;
 
 import me.pigauts.voxelmenus.api.animation.Animation;
 import me.pigauts.voxelmenus.api.factory.*;
+import me.pigauts.voxelmenus.api.flag.Flag;
 import me.pigauts.voxelmenus.api.function.Function;
 import me.pigauts.voxelmenus.api.menu.Menu;
 import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
@@ -31,6 +32,9 @@ public interface VoxelMenus {
 
     @Nullable
     ItemStack getItem(String itemId);
+
+    @Nullable
+    Flag getFlag(String flagId);
 
     @NotNull
     List<ItemStack> getItems(Collection<String> itemsIds);
@@ -70,6 +74,5 @@ public interface VoxelMenus {
 
     @Nullable
     ActionFactory getActionFactory(String factoryId);
-
 
 }

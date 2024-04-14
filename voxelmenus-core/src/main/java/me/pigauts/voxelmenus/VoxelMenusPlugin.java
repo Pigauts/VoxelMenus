@@ -4,6 +4,7 @@ import me.pigauts.voxelmenus.api.VoxelMenus;
 import me.pigauts.voxelmenus.api.animation.Animation;
 import me.pigauts.voxelmenus.api.config.Config;
 import me.pigauts.voxelmenus.api.factory.*;
+import me.pigauts.voxelmenus.api.flag.Flag;
 import me.pigauts.voxelmenus.api.function.Function;
 import me.pigauts.voxelmenus.api.menu.Menu;
 import me.pigauts.voxelmenus.api.menu.MenuEntryButtons;
@@ -126,6 +127,11 @@ public class VoxelMenusPlugin extends JavaPlugin implements VoxelMenus {
 
     @Override
     public @Nullable ItemStack getItem(String itemId) {
+        return null;
+    }
+
+    @Override
+    public @Nullable Flag getFlag(String flagId) {
         return null;
     }
 

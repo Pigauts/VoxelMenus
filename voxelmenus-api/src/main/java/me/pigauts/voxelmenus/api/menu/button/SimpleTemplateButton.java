@@ -13,12 +13,17 @@ public class SimpleTemplateButton implements TemplateButton {
     private final ItemStack buttonItem;
     private Map<ClickType, Function> functions;
     private boolean locked;
-    private int cooldown = 0;
+    private int cooldown;
 
     public SimpleTemplateButton(ItemStack buttonItem, Map<ClickType, Function> functions, boolean locked) {
+        this(buttonItem, functions, locked, 0);
+    }
+
+    public SimpleTemplateButton(ItemStack buttonItem, Map<ClickType, Function> functions, boolean locked, int cooldown) {
         this.buttonItem = buttonItem;
         this.functions = functions;
         this.locked = locked;
+        this.cooldown = cooldown;
     }
 
 //    @Nullable

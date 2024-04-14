@@ -6,7 +6,6 @@ import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.io.File;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -79,17 +78,6 @@ public class Utils {
         } catch (NumberFormatException e) {
             return 0;
         }
-    }
-
-    public static String buildPath(String... args) {
-        StringJoiner joiner = new StringJoiner(File.separator);
-
-        for (String arg : args) {
-            if (arg == null || arg.isEmpty()) continue;
-            joiner.add(arg);
-        }
-
-        return joiner.toString();
     }
 
     public static boolean isOnline(String playerName) {
@@ -197,6 +185,15 @@ public class Utils {
     public static <T> T executeIfNonNull(T t, Consumer<T> consumer) {
         if (t != null) consumer.accept(t);
         return t;
+    }
+
+    public static String getStringSplitAt(String s, String regex, int index) {
+        String[] split = s.split(regex);
+        return index > 0 && index < split.length ? split[index] : null;
+    }
+
+    public static String pathOf(String... keys) {
+        return String.join(".", keys);
     }
 
 //    public void update(Player p, String title){

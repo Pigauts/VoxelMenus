@@ -1,7 +1,6 @@
 package me.pigauts.voxelmenus.api.config;
 
 import me.pigauts.voxelmenus.api.factory.ConfigFactory;
-import me.pigauts.voxelmenus.api.factory.Factory;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.boss.BarColor;
@@ -30,19 +29,23 @@ public interface Config extends ConfigurationSection, ValueHolder {
 
     String getKey();
 
+    String getAbsolutePath();
+
     String getAbsolutePath(String path);
 
     void validate(boolean condition, String path, String error) throws ConfigurationException;
 
-    <T> T validate(T notNull, String... keys) throws ConfigurationException;
+    <T> T notNull(T notNull) throws ConfigurationException;
 
-    <R> R get(Factory<String, R> factory, String... keys);
+    <T> T notNull(T notNull, String path) throws ConfigurationException;
 
-    <R> R getNotNull(Factory<String, R> factory, String... keys) throws ConfigurationException;
+    <T> T create(ConfigFactory<T> factory);
 
-    <R> R getAt(ConfigFactory<R> factory, String... keys);
+    <T> T createNotNull(ConfigFactory<T> factory) throws ConfigurationException;
 
-    <R> R getNotNullAt(ConfigFactory<R> factory, String... keys) throws ConfigurationException;
+    <R> R create(String path, ConfigFactory<R> factory);
+
+    <R> R createNotNull(String path, ConfigFactory<R> factory) throws ConfigurationException;
 
     UUID getUUID(String path);
 

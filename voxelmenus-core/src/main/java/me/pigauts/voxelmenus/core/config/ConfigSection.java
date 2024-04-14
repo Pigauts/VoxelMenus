@@ -1,15 +1,13 @@
 package me.pigauts.voxelmenus.core.config;
 
-import me.pigauts.voxelmenus.util.Deserialize;
-import me.pigauts.voxelmenus.util.Pair;
-import me.pigauts.voxelmenus.util.Path;
-import me.pigauts.voxelmenus.util.Utils;
 import me.pigauts.voxelmenus.VoxelMenusPlugin;
 import me.pigauts.voxelmenus.api.config.Config;
 import me.pigauts.voxelmenus.api.config.ConfigurationException;
 import me.pigauts.voxelmenus.api.factory.ConfigFactory;
-import me.pigauts.voxelmenus.api.factory.Factory;
 import me.pigauts.voxelmenus.item.ItemBuilder;
+import me.pigauts.voxelmenus.util.Deserialize;
+import me.pigauts.voxelmenus.util.Pair;
+import me.pigauts.voxelmenus.util.Utils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
@@ -29,6 +27,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+import static me.pigauts.voxelmenus.util.Utils.pathOf;
+
 public class ConfigSection implements Config {
 
     private static final VoxelMenusPlugin plugin = VoxelMenusPlugin.getPlugin();
@@ -45,10 +45,6 @@ public class ConfigSection implements Config {
         Validate.notNull(section, "Configuration section can't be null");
         this.file = file;
         this.section = section;
-    }
-
-    protected String pathOf(String... args) {
-        return Path.of(args);
     }
 
     @Override
@@ -86,8 +82,13 @@ public class ConfigSection implements Config {
     }
 
     @Override
+    public String getAbsolutePath() {
+        return section.getCurrentPath();
+    }
+
+    @Override
     public String getAbsolutePath(String path) {
-        return Path.at(section.getCurrentPath(), path);
+        return pathOf(section.getCurrentPath(), path);
     }
 
     @Override
@@ -97,29 +98,33 @@ public class ConfigSection implements Config {
     }
 
     @Override
-    public <T> T validate(T notNull, String... keys) throws ConfigurationException {
-        if (isSet(pathOf(keys)) && notNull != null) return notNull;
-        throw new ConfigurationException(String.format("Mistake found in file '%s' at key '%s': %s", file.getPath(), getAbsolutePath(keys), "Value is not set or invalid"));
+    public <T> T notNull(T notNull) throws ConfigurationException {
+        return notNull(notNull, getAbsolutePath());
     }
 
     @Override
-    public <R> R get(Factory<String, R> factory, String... keys) {
-        return factory.create(Path.of(keys));
+    public <T> T notNull(T notNull, String path) throws ConfigurationException {
+        if (notNull != null) return notNull;
+        throw new ConfigurationException(String.format("Mistake found in file '%s' at key '%s': %s", file.getPath(), getAbsolutePath(path), "Value is not set or invalid"));
     }
 
     @Override
-    public <R> R getNotNull(Factory<String, R> factory, String... keys) throws ConfigurationException {
-        return validate(get(factory, keys), keys);
+    public <T> T create(ConfigFactory<T> factory) {
+        return factory.create(this);
     }
 
     @Override
-    public <R> R getAt(ConfigFactory<R> factory, String... keys) {
-        return factory.create(getKeyOrSection(pathOf(keys)));
+    public <T> T createNotNull(ConfigFactory<T> factory) throws ConfigurationException {
+        return notNull(create(factory));
     }
 
     @Override
-    public <R> R getNotNullAt(ConfigFactory<R> factory, String... keys) throws ConfigurationException {
-        return validate(getAt(factory, keys), keys);
+    public <R> R create(String path, ConfigFactory<R> factory) {
+        return factory.create(getKeyOrSection(path));
+    }
+
+    public <R> R createNotNull(String path, ConfigFactory<R> factory) throws ConfigurationException {
+        return notNull(create(path, factory), path);
     }
 
     @Override
@@ -230,8 +235,8 @@ public class ConfigSection implements Config {
     public <R> List<R> getList(ConfigFactory<R> factory) {
         List<R> list = new ArrayList<>();
 
-        for (String key : getKeys(false)) {
-            R result = factory.create(getKeyOrSection(key));
+        for (Config key : getSubSections()) {
+            R result = factory.create(key);
 
             if (result != null) {
                 list.add(result);
@@ -245,8 +250,8 @@ public class ConfigSection implements Config {
     public <R> List<R> getList(ConfigFactory<R> factory, String path) {
         List<R> list = new ArrayList<>();
 
-        for (String key : getKeys(path, false)) {
-            R result = factory.create(getKeyOrSection(key));
+        for (Config key : getSubSections(path)) {
+            R result = factory.create(key);
 
             if (result != null) {
                 list.add(result);
@@ -317,10 +322,6 @@ public class ConfigSection implements Config {
         return null;
     }
 
-    protected String getAbsolutePath(String... keys) {
-        return Path.at(section.getCurrentPath(), keys);
-    }
-
     @Override
     public ItemStack getCustomItem(String path) {
 //        return plugin.getItem(getString(path));
@@ -353,7 +354,7 @@ public class ConfigSection implements Config {
         Set<String> paths = new HashSet<>();
 
         for (String key : getKeys(path, deep)) {
-            paths.add(Path.of(path, key));
+            paths.add(pathOf(path, key));
         }
 
         return paths;
@@ -364,7 +365,7 @@ public class ConfigSection implements Config {
         Set<String> paths = new HashSet<>();
 
         for (String key : getKeys(path, deep)) {
-            paths.add(Utils.buildPath(section.getCurrentPath(), path, key));
+            paths.add(pathOf(section.getCurrentPath(), path, key));
         }
 
         return paths;
