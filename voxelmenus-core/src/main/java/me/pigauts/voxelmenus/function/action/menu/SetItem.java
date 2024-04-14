@@ -1,9 +1,8 @@
 package me.pigauts.voxelmenus.function.action.menu;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.api.function.Action;
-import me.pigauts.voxelmenus.util.SlotItem;
-import org.bukkit.inventory.ItemStack;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import org.bukkit.inventory.*;
 
 public class SetItem implements Action {
 

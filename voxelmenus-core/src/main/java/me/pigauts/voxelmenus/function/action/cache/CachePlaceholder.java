@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.function.action.cache;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
+import me.pigauts.voxelmenus.api.core.placeholder.Placeholder;
 import me.pigauts.voxelmenus.api.function.Action;
-import me.pigauts.voxelmenus.core.holder.Placeholder;
+import me.pigauts.voxelmenus.api.player.MenuPlayer;
 
 public class CachePlaceholder implements Action {
 

@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.function.action.player;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.api.function.Action;
-import org.bukkit.Location;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import org.bukkit.*;
 
 public class Teleport implements Action {
 

@@ -1,16 +1,10 @@
 package me.pigauts.voxelmenus.function;
 
-import me.pigauts.voxelmenus.API.Function;
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.core.holder.Placeholder;
-import me.pigauts.voxelmenus.core.input.ArgumentInput;
-import me.pigauts.voxelmenus.core.input.InputReceiver;
-import me.pigauts.voxelmenus.core.input.PlaceholderInput;
+import me.pigauts.voxelmenus.api.core.placeholder.*;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class InputFunction implements Function, InputReceiver<Placeholder> {
 

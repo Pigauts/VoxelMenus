@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.function.action.menu;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.menu.view.AtlasView;
+import me.pigauts.voxelmenus.api.menu.view.*;
+import me.pigauts.voxelmenus.api.player.*;
 
 public abstract class AtlasViewAction implements ViewAction<AtlasView> {
 

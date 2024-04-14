@@ -46,8 +46,8 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
     public MenuBuilder(@NotNull Config config) {
         name = config.getName();
 
-        storage = config.createNotNull(config::getInventory, "storage");
-        size = storage == InventoryType.CHEST ? config.getInt("rows", 3) * 9 : storage.getDefaultSize();
+        storage = config.getInventory("storage", InventoryType.CHEST);
+        size = (storage == InventoryType.CHEST) ? config.getInt("rows", 3) * 9 : storage.getDefaultSize();
         config.validate(InventoryUtils.isValidInventory(storage, size), "rows", "Invalid number of rows for chest inventory");
 
         refresh = config.getInt("refresh");
@@ -58,7 +58,7 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
         useBottom = config.getBoolean("bottom-inventory", false);
 
         for (String key : config.getKeys("buttons", false)) {
-            templateButtons.put(key, config.create(section -> new ButtonBuilder(section).build(), key));
+            templateButtons.put(key, config.create(key, section -> new ButtonBuilder(section).build()));
         }
 
     }
@@ -67,13 +67,11 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
         return name;
     }
 
-    public InventoryType getStorage() {
-        return storage;
-    }
-
     public MenuBuilder setStorage(InventoryType storage) {
         this.storage = storage;
-        this.size = storage.getDefaultSize();
+        if (!InventoryUtils.isValidInventory(storage, size)) {
+            this.size = storage.getDefaultSize();
+        }
         return this;
     }
 
@@ -82,12 +80,10 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
     }
 
     public MenuBuilder setSize(int size) {
-        this.size = size;
+        if (InventoryUtils.isValidInventory(storage, size)) {
+            this.size = size;
+        }
         return this;
-    }
-
-    public int getRefresh() {
-        return refresh;
     }
 
     public MenuBuilder setRefresh(int refresh) {
@@ -95,29 +91,9 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
         return this;
     }
 
-    public Animation getAnimation() {
-        return animation;
-    }
-
     public MenuBuilder setAnimation(Animation animation) {
         this.animation = animation;
         return this;
-    }
-
-    public boolean keepOpen() {
-        return keepOpen;
-    }
-
-    public boolean lockBottom() {
-        return lockBottom;
-    }
-
-    public boolean lockEmpty() {
-        return lockEmpty;
-    }
-
-    public boolean useBottom() {
-        return useBottom;
     }
 
     public MenuBuilder keepOpen(boolean keepOpen) {
@@ -140,23 +116,13 @@ public abstract class MenuBuilder<T extends Menu> extends Builder<T> {
         return this;
     }
 
-    public MenuBuilder addCustomButton(String name, Button button) {
+    public MenuBuilder addButton(String name, TemplateButton button) {
         templateButtons.put(name, button);
         return this;
     }
 
-    public MenuBuilder removeCustomButton(String name) {
-        templateButtons.remove(name);
-        return this;
-    }
-
-    public Button getCustomButton(String buttonId) {
-        Button button = templateButtons.get(buttonId);
-        return button == null ? plugin.getCustomButton(buttonId) : button;
-    }
-
-    public MenuSettings getSettings() {
-        return new MenuSettings(storage, size, refresh, keepOpen, lockBottom, lockEmpty);
+    protected MenuSettings getSettings() {
+        return new MenuSettings(refresh, keepOpen, lockBottom, lockEmpty);
     }
 
 }

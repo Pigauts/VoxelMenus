@@ -3,7 +3,7 @@ package me.pigauts.voxelmenus.api.core;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParseUtil {
+public class ParseUtils {
 
     public static int parseInteger(String text) {
         try {

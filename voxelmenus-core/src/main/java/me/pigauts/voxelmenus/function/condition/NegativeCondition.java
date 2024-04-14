@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.function.condition;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.api.function.Condition;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
 
 public class NegativeCondition implements Condition {
 

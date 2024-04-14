@@ -307,6 +307,39 @@ public class ConfigSection implements Config {
     }
 
     @Override
+    public String[][] get2DArray(String path) {
+        List<String> stringList = getStringList(path);
+
+        String[][] array = new String[stringList.size()][];
+        for (int i = 0; i < stringList.size(); i++) {
+            String[] row = stringList.get(i).split(" ");
+            array[i] = row;
+        }
+
+        return array;
+    }
+
+    @Override
+    public String[][] get2DArray(String path, int length, int height) {
+        Validate.isTrue(length >= 0 && height >= 0, "Rows/columns cannot be negative");
+
+        List<String> rows = getStringList(path);
+
+        String[][] array = new String[length][height];
+        for (int i = 0; i < length; i++) {
+            if (i < rows.size()) {
+                String[] row = rows.get(i).split(" ");
+                array[i] = row.length == height ? row : Arrays.copyOf(row, height);
+                continue;
+            }
+
+            array[i] = new String[height];
+        }
+
+        return array;
+    }
+
+    @Override
     public <E extends Enum<E>> E getEnum(String path, Class<E> enumClass) {
         return Utils.getEnum(enumClass, getString(path));
     }

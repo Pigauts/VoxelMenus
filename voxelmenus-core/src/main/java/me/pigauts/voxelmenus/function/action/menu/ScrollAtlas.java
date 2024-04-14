@@ -1,9 +1,9 @@
 package me.pigauts.voxelmenus.function.action.menu;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.ScrollDirection;
-import me.pigauts.voxelmenus.API.menu.view.AtlasView;
-import org.jetbrains.annotations.NotNull;
+import me.pigauts.voxelmenus.api.core.enums.*;
+import me.pigauts.voxelmenus.api.menu.view.*;
+import me.pigauts.voxelmenus.api.player.*;
+import org.jetbrains.annotations.*;
 
 public class ScrollAtlas extends AtlasViewAction {
 

@@ -117,6 +117,10 @@ public interface Config extends ConfigurationSection, ValueHolder {
 
     LocalDateTime getDate(String path, LocalDateTime def);
 
+    String[][] get2DArray(String path);
+
+    String[][] get2DArray(String path, int rows, int columns);
+
     <E extends Enum<E>> E getEnum(String path, Class<E> enumClass);
 
     <E extends Enum<E>> E getEnum(String path, Class<E> enumClass, E def);

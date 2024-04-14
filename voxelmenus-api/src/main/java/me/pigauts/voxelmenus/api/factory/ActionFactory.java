@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.api.factory;
 
 import me.pigauts.voxelmenus.api.config.Config;
-import me.pigauts.voxelmenus.api.core.ParseUtil;
+import me.pigauts.voxelmenus.api.core.ParseUtils;
 import me.pigauts.voxelmenus.api.function.Action;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public interface ActionFactory extends ConfigFactory<Action> {
 
         @Override
         default Action create(String value) {
-            return create(ParseUtil.parseBoolean(value));
+            return create(ParseUtils.parseBoolean(value));
         }
 
         Action create(boolean value);
@@ -59,7 +59,7 @@ public interface ActionFactory extends ConfigFactory<Action> {
 
         @Override
         default Action create(String value) {
-            return create(ParseUtil.parseInteger(value));
+            return create(ParseUtils.parseInteger(value));
         }
 
         Action create(int value);
@@ -88,7 +88,7 @@ public interface ActionFactory extends ConfigFactory<Action> {
 
         @Override
         default Action create(String value) {
-            return create(ParseUtil.parseStringList(value));
+            return create(ParseUtils.parseStringList(value));
         }
 
         Action create(List<String> value);

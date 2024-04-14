@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.function.action.menu;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.api.function.Action;
+import me.pigauts.voxelmenus.*;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
 
 public class OpenMenu implements Action {
 
@@ -16,7 +16,7 @@ public class OpenMenu implements Action {
 
     @Override
     public void execute(MenuPlayer player) {
-        player.openMenu(plugin.getMenus().getMenu(menuName));
+        player.openMenu(plugin.getMenu(menuName));
     }
 
 }

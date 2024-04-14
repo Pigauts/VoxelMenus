@@ -1,8 +1,8 @@
 package me.pigauts.voxelmenus.function.action.player;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.api.function.Action;
-import me.pigauts.voxelmenus.core.config.ConfigSection;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import me.pigauts.voxelmenus.core.config.*;
 
 public class SetExp implements Action {
 

@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.function.action.cache;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
 import me.pigauts.voxelmenus.api.function.Action;
+import me.pigauts.voxelmenus.api.player.MenuPlayer;
 
 public class FlushPlaceholder implements Action {
 

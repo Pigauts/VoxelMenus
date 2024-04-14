@@ -34,7 +34,7 @@ public class PagedMenuBuilder extends StaticMenuBuilder {
 
     @Override
     public PagedMenu build() {
-        return new PagedMenu(name, getSettings(), getMeta());
+        return new PagedMenu(name, getSettings(), getInventoryMeta());
     }
 
     @Override

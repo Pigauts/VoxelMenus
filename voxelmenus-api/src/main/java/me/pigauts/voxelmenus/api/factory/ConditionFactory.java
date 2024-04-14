@@ -1,7 +1,7 @@
 package me.pigauts.voxelmenus.api.factory;
 
 import me.pigauts.voxelmenus.api.config.Config;
-import me.pigauts.voxelmenus.api.core.ParseUtil;
+import me.pigauts.voxelmenus.api.core.ParseUtils;
 import me.pigauts.voxelmenus.api.function.Condition;
 
 @FunctionalInterface
@@ -35,7 +35,7 @@ public interface ConditionFactory extends ConfigFactory<Condition> {
 
         @Override
         default Condition create(String value) {
-            return create(ParseUtil.parseInteger(value));
+            return create(ParseUtils.parseInteger(value));
         }
 
         Condition create(int value);

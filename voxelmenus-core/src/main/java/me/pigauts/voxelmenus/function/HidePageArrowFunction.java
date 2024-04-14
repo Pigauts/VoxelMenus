@@ -1,17 +1,16 @@
 package me.pigauts.voxelmenus.function;
 
-import me.pigauts.voxelmenus.API.Function;
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.API.menu.view.PagedView;
-import me.pigauts.voxelmenus.api.menu.MenuMeta;
-import me.pigauts.voxelmenus.menu.widget.Button;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.menu.button.*;
+import me.pigauts.voxelmenus.api.menu.view.*;
+import me.pigauts.voxelmenus.api.player.*;
 
 public class HidePageArrowFunction implements Function {
 
-    private final Button nextButton, backButton, disguise;
+    private final TemplateButton nextButton, backButton, disguise;
     private final int[] nextButtons, backButtons;
 
-    public HidePageArrowFunction(Button nextButton, Button backButton, Button disguise, int[] nextArrows, int[] backArrows) {
+    public HidePageArrowFunction(TemplateButton nextButton, TemplateButton backButton, TemplateButton disguise, int[] nextArrows, int[] backArrows) {
         this.nextButton = nextButton;
         this.backButton = backButton;
         this.disguise = disguise;

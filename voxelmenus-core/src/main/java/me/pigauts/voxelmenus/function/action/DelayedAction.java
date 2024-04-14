@@ -1,9 +1,9 @@
 package me.pigauts.voxelmenus.function.action;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.VoxelMenusPlugin;
-import me.pigauts.voxelmenus.api.function.Action;
-import me.pigauts.voxelmenus.core.runnable.MenusScheduler;
+import me.pigauts.voxelmenus.*;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import me.pigauts.voxelmenus.core.runnable.*;
 
 public class DelayedAction implements Action {
 

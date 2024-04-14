@@ -1,10 +1,8 @@
 package me.pigauts.voxelmenus.function.action.world;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.api.function.Action;
-import me.pigauts.voxelmenus.util.Weather;
-import me.pigauts.voxelmenus.util.WeatherCondition;
-import org.bukkit.World;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import org.bukkit.*;
 
 public class SetWeather implements Action {
 

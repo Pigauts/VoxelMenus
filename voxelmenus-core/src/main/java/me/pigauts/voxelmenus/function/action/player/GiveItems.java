@@ -1,18 +1,18 @@
 package me.pigauts.voxelmenus.function.action.player;
 
-import me.pigauts.voxelmenus.API.MenuPlayer;
-import me.pigauts.voxelmenus.Util;
-import me.pigauts.voxelmenus.api.function.Action;
-import org.bukkit.inventory.ItemStack;
+import me.pigauts.voxelmenus.api.function.*;
+import me.pigauts.voxelmenus.api.player.*;
+import me.pigauts.voxelmenus.util.*;
+import org.bukkit.inventory.*;
 
-import java.util.Collection;
+import java.util.*;
 
 public class GiveItems implements Action {
 
     private final ItemStack[] items;
 
     public GiveItems(Collection<ItemStack> items) {
-        this.items = Util.toNotNullArray(items, new ItemStack[0]);
+        this.items = Utils.toNotNullArray(items, new ItemStack[0]);
     }
 
     @Override

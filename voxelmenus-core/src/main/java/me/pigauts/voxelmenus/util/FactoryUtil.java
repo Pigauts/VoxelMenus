@@ -6,6 +6,7 @@ import me.pigauts.voxelmenus.api.event.config.ActionLoadEvent;
 import me.pigauts.voxelmenus.api.event.config.ConditionLoadEvent;
 import me.pigauts.voxelmenus.api.function.Action;
 import me.pigauts.voxelmenus.api.function.Condition;
+import me.pigauts.voxelmenus.api.function.Function;
 
 public class FactoryUtil {
 
@@ -23,4 +24,7 @@ public class FactoryUtil {
         return event.getResult();
     }
 
+    public static Function createFunction(Config config) {
+        return null;
+    }
 }
